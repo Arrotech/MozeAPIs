@@ -47,7 +47,8 @@ body{
   clear: both;
   display: table;
   background: #d65050;
-} 
+}
+
 img{
   width: 100%;
   height: 100%;
@@ -110,16 +111,28 @@ td{
 input[type=text], input[type=password] {
 
   height: 30px;
-  width: 250px;
+  width: 300px;
   padding: 15px;
   display: inline-block;
   border: none;
   background: rgb(233, 236, 236);
-  border-radius: 100px;
+  border-radius: 10px;
+}
+
+textarea{
+  border-radius: 10px;
+  width: 250px;
+  height: 150px;
+  background: rgb(233, 236, 236);
+}
+
+textarea:focus{
+  background-color: white;
+  outline: none;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
+  background-color: white;
   outline: none;
 }
 
@@ -169,8 +182,8 @@ li a:hover{
 
 /* Set a style for all buttons */
 button {
-  background-color: rgb(230, 78, 78);
-  color: #252525;
+  background-color: #000000;
+  color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -217,37 +230,67 @@ nav.container{
   float: left;
 }
 .wrap-login{
-  width: 27.89%;
+  padding: 10px;
+  width: 25.5%;
   margin: 0 auto;
   height: 38%;
   background-origin: padding-box;
-  background-color: #eae7dc;
+  background-color: #d65050;
   border-radius: 20px;
-  padding-left: 20px;
 }
-.wrap-specific{
-  width: 27.89%;
-  margin: 0 auto;
-  height: 38%;
+
+.wrap-login h2{
+  text-align: center;
+}
+
+.wrap-register h2{
+  text-align: center;
+}
+
+
+.wrap-contact{
+  padding-top: 10px;
+  width: 650px;
+  height: 470px;
   background-origin: padding-box;
-  float: left;
+  background-color: #ddd;
+  padding-left: 200px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.mapouter{
+  position:relative;
+  text-align:right;
+  height:500px;
+  width:600px;
+}
+.gmap_canvas {
+  overflow:hidden;
+  background:none!important;
+  height:500px;
+  width:600px;
+}
+
+.contact-row{
+  height: 500px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+}
+
+.contact-map{
+  margin-left: 0px;
 }
 
 .wrap-register{
-  width: 27.89%;
+  width: 25.5%;
   margin: 0 auto;
   height: 59%;
   background-origin: padding-box;
-  background-color: #eae7dc;
+  background-color: #d65050;
   border-radius: 20px;
-  padding-left: 20px;
-}
-
-.wrap-order{
-  width: 27.89%;
-  margin: 0 auto;
-  height: 120%;
-  background-origin: padding-box;
+  padding: 10px;
 }
 
 .wrap-home{
@@ -255,15 +298,12 @@ nav.container{
   margin: 0 auto;
   height: 50%;
 }
-.container-up{
-  margin: 0 auto;
-}
 
 .container {
   padding: 16px;
   align-content: center;
   margin: 0 auto;
-  background-color: white;
+  background-color: #eae7dc;
   
 }
 
@@ -359,12 +399,12 @@ text-align: center;
 /*lfet sidebar*/
 .leftnav {
   height: 100%;
-  width: 160px;
+  width: 197px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #000000;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -375,6 +415,7 @@ text-align: center;
   font-size: 16px;
   color: #818181;
   display: block;
+  font-weight: bold;
 }
 
 .leftnav a:hover {
@@ -382,7 +423,7 @@ text-align: center;
 }
 
 .main {
-  margin-left: 160px;
+  margin-left: 190px;
   font-size: 14px;
   padding: 0px 10px;
   background: #F3EFE0;
@@ -629,6 +670,7 @@ div.content {
   left: 100px;
   font-size: 40px;
   text-align: left;
+  font-weight: bolder;
 }
 
 .container-text {
@@ -638,12 +680,13 @@ div.content {
 }
 
 .w3-content img{
-  height: 800px;
+  height: 540px;
 }
+
 
 .btn-position{
   position: absolute;
-  top: 320px;
+  top: 340px;
   left: 170px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -659,7 +702,7 @@ div.content {
 
 .btn-position2{
   position: absolute;
-  top: 320px;
+  top: 340px;
   left: 370px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -698,6 +741,7 @@ div.content {
   top: 150px;
   left: 100px;
   text-align: left;
+  font-weight: bold;
 }
 
 /*Numbers row*/
@@ -813,6 +857,7 @@ border: 1px solid #eae7dc;
   height: 485px;
 }
 .home-row2{
+  padding-left: 10px;
   top: 0;
   width: 100%;
   height: 550px;
@@ -871,17 +916,19 @@ text-align: center;
   color: #000000; /* Grey text */
   width: 100%; /* Full width */
   padding: 20px; /* Some padding */
+  text-align: left;
 }
 
 .home-row2-content3{
   height: 100%;
   top: 20px;
-  left: 420px;
+  left: 450px;
   position: absolute;/* Position the background text */
   bottom: 0; /* At the bottom. Use top:0 to append it to the top */
   color: #000000; /* Grey text */
   width: 100%; /* Full width */
   padding: 20px; /* Some padding */
+  text-align: left
 }
 
 .home-row2-content4{
@@ -897,11 +944,11 @@ text-align: center;
 
 .home-row2-content4 img{
   width: 315px;
-  height: 300px;
+  height: 275px;
 }
 
 video{
-  width: 400px;
+  width: 350px;
   height: 250px;
 }
 
@@ -910,6 +957,7 @@ video{
   top: 420px;
   left: 20px;
   font-size: 14px;
+  font-weight: bold;
   text-align: left;
   color: white;
   max-width: 315px;
