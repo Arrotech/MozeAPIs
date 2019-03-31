@@ -1,0 +1,89 @@
+document.getElementById('getRank').addEventListener('click', getRank);
+
+    function callToast() {
+
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function onSuccess(msg){
+
+        document.getElementById('snackbar').innerText = msg
+        callToast();
+    }
+
+    function raiseError(msg){
+
+        document.getElementById('snackbar').innerText = msg
+        callToast();
+    }
+
+    function getRank(event){
+            event.preventDefault();
+
+            token = window.localStorage.getItem('token');
+
+            fetch('http://localhost:5000/api/v1/portal/exams' ,{
+                method: 'GET',
+                headers : {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                let rank = `<h3 style="margin-left: 10px;"> Exams grouped by Subjects.</h3>`;
+                data.exams.forEach(exam => {
+                    let status = data['status'];
+                    let message = data['message'];
+                    const { exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam
+                    rank += `
+                        <div>
+                            <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${exam.admission_no}</h4>
+                            <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Exam ID: ${exam.exam_id}</h4>
+                            <table>
+                                <tr>
+                                    <th>Admission No.</th>
+                                    <th>Mathematics</th>
+                                    <th>English</th>
+                                    <th>Kiswahili</th>
+                                    <th>Chemistry</th>
+                                    <th>Biology</th>
+                                    <th>Physics</th>
+                                    <th>History</th>
+                                    <th>Geography</th>
+                                    <th>Cre</th>
+                                    <th>Agriculture</th>
+                                    <th>Business</th>
+                                </tr>
+                                <tr>
+                                    <td>${exam.admission_no}</td>
+                                    <td>${exam.maths}</td>
+                                    <td>${exam.english}</td>
+                                    <td>${exam.kiswahili}</td>
+                                    <td>${exam.chemistry}</td>
+                                    <td>${exam.biology}</td>
+                                    <td>${exam.physics}</td>
+                                    <td>${exam.history}</td>
+                                    <td>${exam.geography}</td>
+                                    <td>${exam.cre}</td>
+                                    <td>${exam.agriculture}</td>
+                                    <td>${exam.business}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    `;
+                    if (status === '200'){
+                        document.getElementById('rank').innerHTML = rank;
+                    }else{
+                        raiseError(message);
+                    }
+                    });
+                    })
+            .catch((err)=>{
+                raiseError("Please check your internet connection and try again!");
+                console.log(err);
+            })
+    }
