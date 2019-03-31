@@ -9,23 +9,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<header><h1>Njoro Central Secondary</h1></header>
+<nav>
+    <div class="logo-nav">
+        <ul>
+            <li style="padding-top: 0px;"><a href="index.html">
+                <div class="logo-image">
+                    <img src="img/logo.png">
+                </div>
+            </a></li>
+            <li><h1>SECONDARY SCHOOLS</h1></li>
+        </ul>
+    </div>
+</nav>
 <nav>
     <div>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="login.html">Student</a></li>
             <li><a href="login.html">Staff</a></li>
-            <li><a href="academics.html">Academics</a></li>
-            <li><a href="admission.html">Admission</a></li>
-            <li><a href="co-curriculum.html">Co-curriculum</a></li>
-            <li><a href="news.html">News</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </div>
 </nav>
-<div class="main-content"></div>
+<div class="contact-row">
+    <div class="contact-map">
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=JomoKenyatta%20university&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"> 
+                </iframe><a href="https://www.emojilib.com"></a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form action="action_page.php">
+            <div class="container">
+                <div class="wrap-contact">
+                    <h1>Contact Us</h1>
+
+                    <label>First Name:</label><br>
+                    <input type="text" id="fname" name="firstname" placeholder="First Name"><br>
+                    <br>
+
+                    <label>Last Name:</label><br>
+                    <input type="text" id="lname" name="lastname" placeholder="Last Name"><br>
+                    <br>
+
+                    <label>Country</label>
+                    <select id="country" name="country">
+                      <option value="australia">Australia</option>
+                      <option value="canada">Canada</option>
+                      <option value="usa">USA</option>
+                      <option value="usa">Kenya</option>
+                      <option value="usa">Uganda</option>
+                      <option value="usa">Tanzania</option>
+                      <option value="usa">Ethiopia</option>
+                      <option value="usa">Somalia</option>
+                    </select>
+                    <br><br>
+
+                    <label>Subject:</label><br>
+                    <textarea id="subject" name="subject" placeholder="Write something.."></textarea><br>
+
+                    <button type="Submit" class="btn signupbtn">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <footer>
     <div class="footer-divide">
         <div class="divide">
