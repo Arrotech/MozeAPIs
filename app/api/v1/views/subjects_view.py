@@ -13,9 +13,8 @@ class Subjects(Resource):
     @jwt_required
     def post(self):
         """Create a new exam entry."""
-
         details = request.get_json()
-
+        admission_no = details['admission_no']
         maths = details['maths']
         english = details['english']
         kiswahili = details['kiswahili']
@@ -28,27 +27,49 @@ class Subjects(Resource):
         agriculture = details['agriculture']
         business = details['business']
 
-        res = SubjectsModel().save(maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-                                   agriculture, business)
+        res = SubjectsModel().save(admission_no,
+                                   maths,
+                                   english,
+                                   kiswahili,
+                                   chemistry,
+                                   biology,
+                                   physics,
+                                   history,
+                                   geography,
+                                   cre,
+                                   agriculture,
+                                   business)
         return make_response(jsonify({
-            "message": "Subjects registered successfully!"
+            "status": "201",
+            "message": "Subjects registered successfully!",
+            "subjects": res
         }), 201)
-
-
-class GetAllSubjects(Resource):
-    """Fetch all orders."""
 
     @jwt_required
     def get(self):
-        empty_list = {}
-        subjects = SubjectsModel().get_all_subjects()
-        subjects = json.loads(subjects)
-        if subjects:
+        """Fetch all registered subjects."""
+        return make_response(jsonify({
+            "status": "200",
+            "message": "success",
+            "subjects": json.loads(SubjectsModel().get_subjects())
+        }), 200)
+
+
+class OneSubject(Resource):
+    """Fetch a specific subject."""
+
+    @jwt_required
+    def get(self, admission_no):
+        """Fetch one subject."""
+        subject = SubjectsModel().get_admission_no(admission_no)
+        subject = json.loads(subject)
+        if subject:
             return make_response(jsonify({
+                "status": "200",
                 "message": "success",
-                "Subjects registered": subjects
+                "subject": subject
             }), 200)
         return make_response(jsonify({
-            "message": "success",
-            "Subjects registered": empty_list
-        }), 200)
+            "status": "404",
+            "message": "Exam Not Found"
+        }), 404)

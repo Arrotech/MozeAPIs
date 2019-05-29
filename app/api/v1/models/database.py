@@ -18,7 +18,6 @@ class Database:
 
     def create_table(self):
         """Create tables."""
-
         queries = [
             """
             CREATE TABLE IF NOT EXISTS users(
@@ -61,18 +60,20 @@ class Database:
             """
             CREATE TABLE IF NOT EXISTS fees(
                 fee_id serial PRIMARY KEY,
-                fees numeric NOT NULL,
-                fee_paid numeric NOT NULL,
-                fee_balance numeric NOT NULL
+                admission_no varchar NOT NULL,
+                transaction_type varchar NOT NULL,
+                transaction_no varchar NOT NULL,
+                description varchar NOT NULL,
+                amount numeric NOT NULL
             )
             """,
             """
             CREATE TABLE IF NOT EXISTS library(
                 book_id serial PRIMARY KEY,
+                admission_no varchar NOT NULL,
                 author varchar NOT NULL,
                 title varchar NOT NULL,
-                subject varchar NOT NULL,
-                book_identity varchar NOT NULL
+                subject varchar NOT NULL
             )""",
             """
             CREATE TABLE IF NOT EXISTS studentId(
@@ -80,13 +81,13 @@ class Database:
                 surname varchar NOT NULL,
                 first_name varchar NOT NULL,
                 last_name varchar NOT NULL,
-                admission_no varchar NOT NULL,
-                subjects varchar NOT NULL
+                admission_no varchar NOT NULL
             )
             """,
             """
             CREATE TABLE IF NOT EXISTS subjects(
                 subject_id serial PRIMARY KEY,
+                admission_no varchar NOT NULL,
                 maths varchar NOT NULL,
                 english varchar NOT NULL,
                 kiswahili varchar NOT NULL,
@@ -111,7 +112,6 @@ class Database:
 
     def create_admin(self):
         """Create a deafult admin user."""
-
         query = "INSERT INTO users(firstname,lastname,surname,admission_no,email,password,form,role)\
         VALUES('Harun','Gachanja','Gitundu','NA','admin@admin.com','pbkdf2:sha256:50000$aNlgJU9E$bf5d2dc9783e38f905618aacd50eb55b098f282dc6b03834aee7c4f80a9100e8','5','admin')"
 
@@ -121,7 +121,6 @@ class Database:
 
     def destroy_table(self):
         """Destroy tables"""
-
         exams = "DROP TABLE IF EXISTS  exams CASCADE"
         users = "DROP TABLE IF EXISTS  users CASCADE"
         evaluation = "DROP TABLE IF EXISTS evaluation CASCADE"

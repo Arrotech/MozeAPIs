@@ -50,7 +50,6 @@ class Exams(Resource):
         }), 201)
 
     @jwt_required
-    @admin_required
     def get(self):
         """Get all exams."""
         return make_response(jsonify({
