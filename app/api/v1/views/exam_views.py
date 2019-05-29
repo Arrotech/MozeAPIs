@@ -7,6 +7,7 @@ from flask_restful import Resource
 
 from app.api.v1.models.exams_model import ExamsModel
 from utils.authorization import admin_required
+from utils.utils import check_exams_keys
 
 
 class Exams(Resource):
@@ -16,6 +17,9 @@ class Exams(Resource):
     @admin_required
     def post(self):
         """Create a new exam entry."""
+        errors = check_exams_keys(request)
+        if errors:
+            return raise_error(400, "Invalid {} key".format(', '.join(errors)))
         details = request.get_json()
         admission_no = details['admission_no']
         maths = details['maths']
@@ -54,7 +58,7 @@ class Exams(Resource):
         """Get all exams."""
         return make_response(jsonify({
             "status": "200",
-            "message": "success",
+            "message": "successfully retrieved",
             "exams": json.loads(ExamsModel().get_all_exams())
         }), 200)
 
@@ -63,13 +67,14 @@ class OneExam(Resource):
     """Fetch a specific order."""
 
     @jwt_required
-    def get(self, admission_no):
+    def get(self, exam_id):
         """Fetch one exam."""
-        exam = ExamsModel().get_admission_no(admission_no)
+        exam = ExamsModel().get_exam_by_id(exam_id)
         exam = json.loads(exam)
         if exam:
             return make_response(jsonify({
-                "message": "success",
+                "status": "200",
+                "message": "successfully retrieved",
                 "Exam": exam
             }), 200)
         return make_response(jsonify({
@@ -81,6 +86,9 @@ class OneExam(Resource):
     @admin_required
     def put(self, exam_id):
         """Update exams scores."""
+        errors = check_exams_keys(request)
+        if errors:
+            return raise_error(400, "Invalid {} key".format(', '.join(errors)))
         details = request.get_json()
         admission_no = details['admission_no']
         maths = details['maths']

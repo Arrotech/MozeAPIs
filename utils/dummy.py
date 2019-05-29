@@ -1,3 +1,5 @@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Auth Information @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 create_account = {
     "firstname": "Mercy",
     "lastname": "Wairimu",
@@ -132,4 +134,67 @@ wrong_email = {
     "email": "gitundu",
     "password": "Samuel20930988",
     "form": "4"
+}
+
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Exams Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+new_entry = {
+"admission_no": "NJCF4001",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+entry = {
+"admission_no": "NJCF4001",
+"maths": "98",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+Invalid_exam_key = {
+"admissioo": "NJCS001",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+Invalid_exam_key_put = {
+"admissioo": "NJCS001",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
 }

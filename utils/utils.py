@@ -11,6 +11,14 @@ def check_register_keys(request):
             errors.append(key)
     return errors
 
+def check_exams_keys(request):
+    res_keys = ['admission_no', 'maths', 'english', 'kiswahili', 'chemistry', 'biology', 'physics', 'history', 'geography', 'cre', 'agriculture', 'business']
+    errors = []
+    for key in res_keys:
+        if not key in request.json:
+            errors.append(key)
+    return errors
+
 
 def raise_error(status, msg):
     return make_response(jsonify({
