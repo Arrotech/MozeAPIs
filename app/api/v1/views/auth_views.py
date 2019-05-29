@@ -13,6 +13,7 @@ from utils.utils import is_valid_email, raise_error, check_register_keys, form_r
 class CreateAccount(Resource):
     """Create a new account."""
 
+
     def post(self):
         """A user can create a new account."""
         errors = check_register_keys(request)

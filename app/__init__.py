@@ -60,7 +60,7 @@ def exam_app(config_name):
     api.add_resource(CreateAccount, '/api/v1/portal/auth/register')
     api.add_resource(SignIn, '/api/v1/portal/auth/login')
     api.add_resource(Exams, '/api/v1/portal/exams')
-    api.add_resource(OneExam, '/api/v1/portal/exams/<string:admission_no>')
+    api.add_resource(OneExam, '/api/v1/portal/exams/<int:exam_id>')
     api.add_resource(User, '/api/v1/portal/users/<int:user_id>')
     api.add_resource(Users, '/api/v1/portal/users')
     api.add_resource(EvaluateTeachers, '/api/v1/portal/evaluate')
