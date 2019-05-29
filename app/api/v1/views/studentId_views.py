@@ -12,36 +12,47 @@ class StudentId(Resource):
     @jwt_required
     def post(self):
         """Add a new Id."""
-
         details = request.get_json()
-
         surname = details['surname']
         first_name = details['first_name']
         last_name = details['last_name']
         admission_no = details['admission_no']
-        subjects = details['subjects']
 
-        studentId = StudentIdModel().save(surname, first_name, last_name, admission_no, subjects)
+        studentId = StudentIdModel().save(surname,
+                                          first_name,
+                                          last_name,
+                                          admission_no)
+        studentId = json.loads(studentId)
         return make_response(jsonify({
-            "message": "Id assigned successfully"
+            "status": "201",
+            "message": "Id assigned successfully",
+            "studentId": studentId
         }), 201)
-
-
-class GetId(Resource):
 
     @jwt_required
     def get(self):
         """View id credentials."""
+        return make_response(jsonify({
+            "status": "200",
+            "message": "Retrieved successfully",
+            "students": json.loads(StudentIdModel().get_all())
+        }), 200)
 
-        empty_list = {}
-        studentId = StudentIdModel().get_id()
-        studentId = json.loads(studentId)
-        if studentId:
+class GetId(Resource):
+    """Get one id."""
+    @jwt_required
+    def get(self, admission_no):
+        """Get id by admission number."""
+        student = StudentIdModel().get_admission_no(admission_no)
+        student = json.loads(student)
+        if student:
             return make_response(jsonify({
-                "message": "Retrieved successfully",
-                "StudentId": studentId
+                "status": "200",
+                "message": "success",
+                "Exam": student
             }), 200)
         return make_response(jsonify({
-            "message": "success",
-            "Books": empty_list
-        }), 200)
+            "status": "404",
+            "message": "Id Not Found"
+        }), 404)
+

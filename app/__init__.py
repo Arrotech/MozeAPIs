@@ -7,10 +7,10 @@ from flask_restful import Api
 from app.api.v1.views.auth_views import SignIn, CreateAccount, User, Users
 from app.api.v1.views.evaluation_views import EvaluateTeachers, GetAllComments, GetOneComment
 from app.api.v1.views.exam_views import Exams, OneExam
-from app.api.v1.views.fees_views import Fees, GetFees, GetFee
-from app.api.v1.views.library_views import Library, GetBooks, GetOneBook
+from app.api.v1.views.fees_views import Fees, GetFee
+from app.api.v1.views.library_views import Library, GetOneBook
 from app.api.v1.views.studentId_views import StudentId, GetId
-from app.api.v1.views.subjects_view import Subjects, GetAllSubjects
+from app.api.v1.views.subjects_view import Subjects, OneSubject
 from app.config import app_config
 
 
@@ -61,21 +61,19 @@ def exam_app(config_name):
     api.add_resource(SignIn, '/api/v1/portal/auth/login')
     api.add_resource(Exams, '/api/v1/portal/exams')
     api.add_resource(OneExam, '/api/v1/portal/exams/<string:admission_no>')
-    api.add_resource(User, '/api/v1/portal/user/<int:user_id>')
+    api.add_resource(User, '/api/v1/portal/users/<int:user_id>')
     api.add_resource(Users, '/api/v1/portal/users')
     api.add_resource(EvaluateTeachers, '/api/v1/portal/evaluate')
     api.add_resource(GetAllComments, '/api/v1/portal/evaluate')
     api.add_resource(GetOneComment, '/api/v1/portal/evaluate/<int:comment_id>')
     api.add_resource(Fees, '/api/v1/portal/fees')
-    api.add_resource(GetFees, '/api/v1/portal/fees')
-    api.add_resource(GetFee, '/api/v1/portal/fees/<int:fee_id>')
+    api.add_resource(GetFee, '/api/v1/portal/fees/<string:admission_no>')
     api.add_resource(Library, '/api/v1/portal/library')
-    api.add_resource(GetBooks, '/api/v1/portal/library')
-    api.add_resource(GetOneBook, '/api/v1/portal/library/<int:book_id>')
+    api.add_resource(GetOneBook, '/api/v1/portal/library/<string:admission_no>')
     api.add_resource(Subjects, '/api/v1/portal/subjects')
-    api.add_resource(GetAllSubjects, '/api/v1/portal/subjects')
+    api.add_resource(OneSubject, '/api/v1/portal/subjects/<string:admission_no>')
     api.add_resource(StudentId, '/api/v1/portal/id')
-    api.add_resource(GetId, '/api/v1/portal/id')
+    api.add_resource(GetId, '/api/v1/portal/id/<string:admission_no>')
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(405, method_not_allowed)
     app.register_error_handler(400, bad_request)

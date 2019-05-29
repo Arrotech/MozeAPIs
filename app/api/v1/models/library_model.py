@@ -10,29 +10,29 @@ class LibraryModel(Database):
 
     def __init__(
             self,
+            admission_no=None,
             author=None,
             title=None,
-            subject=None,
-            book_identity=None):
+            subject=None):
         super().__init__()
+        self.admission_no = admission_no
         self.author = author
         self.title = title
         self.subject = subject
-        self.book_identity = book_identity
 
-    def save(self, author, title, subject, book_identity):
+    def save(self, admission_no, author, title, subject):
         """Add a new book."""
 
-        print(author, title, subject, book_identity)
+        print(admission_no, author, title, subject)
         self.curr.execute(
-            ''' INSERT INTO library(author, title, subject, book_identity)\
+            ''' INSERT INTO library(admission_no, author, title, subject)\
             VALUES('{}','{}','{}','{}')\
-             RETURNING author, title, subject, book_identity''' \
-                .format(author, title, subject, book_identity))
-        books = self.curr.fetchone()
+             RETURNING admission_no, author, title, subject''' \
+                .format(admission_no, author, title, subject))
+        book = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
-        return books
+        return json.dumps(book, default=str)
 
     def get_all_books(self):
         """Fetch all books."""
@@ -43,19 +43,9 @@ class LibraryModel(Database):
         self.curr.close()
         return json.dumps(books, default=str)
 
-    def get_one_book(self, book_id):
-        """Fetch a single book."""
-
-        self.curr.execute(""" SELECT * FROM library WHERE book_id={}""".format(book_id))
-        book = self.curr.fetchone()
-        self.conn.commit()
-        self.curr.close()
-        return json.dumps(book, default=str)
-
-    def get_book_identity(self, book_identity):
-        """Fetch a single book."""
-
-        self.curr.execute(""" SELECT * FROM library WHERE book_identity='{}'""".format(book_identity))
+    def get_admission_no(self, admission_no):
+        """Get an exam with specific admission no."""
+        self.curr.execute(""" SELECT * FROM library WHERE admission_no=%s""", (admission_no,))
         book = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()

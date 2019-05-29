@@ -56,7 +56,6 @@ class ExamsModel(Database):
 
     def get_all_exams(self):
         """Fetch all orders"""
-
         self.curr.execute(''' SELECT * FROM exams''')
         exams = self.curr.fetchall()
         self.conn.commit()
@@ -65,7 +64,6 @@ class ExamsModel(Database):
 
     def get_exam_by_id(self, exam_id):
         """Fetch a single order"""
-
         self.curr.execute(""" SELECT * FROM exams WHERE exam_id={}""".format(exam_id))
         exam = self.curr.fetchone()
         self.conn.commit()
@@ -74,7 +72,6 @@ class ExamsModel(Database):
 
     def get_admission_no(self, admission_no):
         """Get an exam with specific admission no."""
-
         self.curr.execute(""" SELECT * FROM exams WHERE admission_no=%s""", (admission_no,))
         user = self.curr.fetchone()
         self.conn.commit()
@@ -84,7 +81,6 @@ class ExamsModel(Database):
     def update_scores(self, exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history,
                       geography, cre, agriculture, business):
         """User can Change information of the office."""
-
         self.curr.execute("""UPDATE exams\
             SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
             WHERE exam_id={} RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
@@ -97,7 +93,6 @@ class ExamsModel(Database):
 
     def delete_exam(self, exam_id):
         ''' Delete exam.'''
-
         self.curr.execute(''' DELETE FROM exams WHERE exam_id=%s''', (exam_id,))
         self.conn.commit()
         self.curr.close()

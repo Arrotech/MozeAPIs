@@ -1,4 +1,4 @@
-document.getElementById('getExams').addEventListener('click', getExams);
+document.getElementById('getSubjects').addEventListener('click', getSubjects);
 
     function callToast() {
 
@@ -19,12 +19,12 @@ document.getElementById('getExams').addEventListener('click', getExams);
         callToast();
     }
 
-    function getExams(event){
+    function getSubjects(event){
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
 
-            fetch('http://localhost:5000/api/v1/portal/exams' ,{
+            fetch('http://localhost:5000/api/v1/portal/subjects' ,{
                 method: 'GET',
                 headers : {
                     Accept: 'application/json',
@@ -35,15 +35,14 @@ document.getElementById('getExams').addEventListener('click', getExams);
             .then((res) => res.json())
             .then((data) => {
                 let output = `<h3 style="margin-left: 10px;"> Exams grouped by Subjects.</h3>`;
-                data.exams.forEach(exam => {
+                data.subjects.forEach(subject => {
                     let status = data['status'];
                     let message = data['message'];
-                    const { exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam;
-                    if (message === 'success'){
+                    const { subject_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = subject;
                         output += `
                             <div>
-                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${exam.admission_no}</h4>
-                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Exam ID: ${exam.exam_id}</h4>
+                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${subject.admission_no}</h4>
+                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Exam ID: ${subject.subject_id}</h4>
                                 <table>
                                     <tr>
                                         <th>Subjects</th>
@@ -52,55 +51,55 @@ document.getElementById('getExams').addEventListener('click', getExams);
                                     <tr>
                                         
                                         <td>Mathematics</td>
-                                        <td>${exam.maths}</td>
+                                        <td>${subject.maths}</td>
                                     </tr>
                                     <tr>
                                         <td>English</td>
-                                        <td>${exam.english}</td>
+                                        <td>${subject.english}</td>
                                     </tr>
                                     <tr>
                                         <td>Kiswahili</td>
-                                        <td>${exam.kiswahili}</td>
+                                        <td>${subject.kiswahili}</td>
                                     </tr>
                                     <tr>
                                         <td>Chemistry</td>
-                                        <td>${exam.chemistry}</td>
+                                        <td>${subject.chemistry}</td>
                                     </tr>
                                     <tr>
                                         <td>Biology</td>
-                                        <td>${exam.biology}</td>
+                                        <td>${subject.biology}</td>
                                     </tr>
                                     <tr>
                                         <td>Physics</td>
-                                        <td>${exam.physics}</td>
+                                        <td>${subject.physics}</td>
                                     </tr>
                                     <tr>
                                         <td>History</td>
-                                        <td>${exam.history}</td>
+                                        <td>${subject.history}</td>
                                     </tr>
                                     <tr>
                                         <td>Geography</td>
-                                        <td>${exam.geography}</td>
+                                        <td>${subject.geography}</td>
                                     </tr>
                                     <tr>
                                         <td>Cre</td>
-                                        <td>${exam.cre}</td>
+                                        <td>${subject.cre}</td>
                                     </tr>
                                     <tr>
                                         <td>Agriculture</td>
-                                        <td>${exam.agriculture}</td>
+                                        <td>${subject.agriculture}</td>
                                     </tr>
                                     <tr>
                                         <td>Business</td>
-                                        <td>${exam.business}</td>
+                                        <td>${subject.business}</td>
                                     </tr>
                                 </table>
                             </div>
                         `;
-                       
+                    if (status === '200'){
                         document.getElementById('output').innerHTML = output;
                     }else{
-                        raiseError(message)
+                        raiseError(message);
                     }
                     });
                     })

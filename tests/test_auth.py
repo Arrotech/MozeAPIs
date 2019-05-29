@@ -1,6 +1,6 @@
 import json
 
-from utils.dummy import create_account, user_login, new_account, new_login, new_account1, wrong_firstname, \
+from utils.dummy import admin_login, admin_account_test, admin_account, email_already_exists, Invalid_register_key, create_account, user_login, new_account, new_login, new_account1, wrong_firstname, \
     wrong_lastname, wrong_surname, wrong_form, wrong_email
 from .base_test import BaseTest
 
@@ -17,6 +17,15 @@ class TestUsersAccount(BaseTest):
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
         return auth_header
 
+    def get_admin_token(self):
+        self.client.post('/api/v1/portal/auth/register', data=json.dumps(admin_account),
+                         content_type='application/json')
+        resp = self.client.post('/api/v1/portal/auth/login', data=json.dumps(admin_login),
+                                content_type='application/json')
+        access_token = json.loads(resp.get_data(as_text=True))['token']
+        auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
+        return auth_header
+
     def test_create_account(self):
         """Test the vote json keys."""
 
@@ -26,6 +35,65 @@ class TestUsersAccount(BaseTest):
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Account created successfully!')
         assert response.status_code == 201
+
+    def test_get_users(self):
+        """Test fetching all offices that have been created."""
+
+        response = self.client.post(
+            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            headers=self.get_token())
+        response1 = self.client.get(
+            '/api/v1/portal/users', content_type='application/json', headers=self.get_admin_token())
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'],
+                         "successfully retrieved")
+        assert response1.status_code == 200
+
+    def test_get_user_by_admission(self):
+        """Test getting a specific party by id."""
+
+        response = self.client.post(
+            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            headers=self.get_token())
+        response1 = self.client.get(
+            '/api/v1/portal/users/1', content_type='application/json', headers=self.get_admin_token())
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'],
+                         'successfully retrieved')
+        assert response1.status_code == 200
+
+    def test_get_user_not_found(self):
+        """Test getting a specific party by id."""
+
+        response = self.client.post(
+            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            headers=self.get_token())
+        response1 = self.client.get(
+            '/api/v1/portal/users/100', content_type='application/json', headers=self.get_admin_token())
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'],
+                         'User Not Found')
+        assert response1.status_code == 404
+
+    def test_email_exists(self):
+        """Test the vote json keys."""
+
+        response = self.client.post(
+            '/api/v1/portal/auth/register', data=json.dumps(email_already_exists), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'Email Already Exists!')
+        assert response.status_code == 400
+
+    def test_Invalid_register_key(self):
+        """Test the vote json keys."""
+
+        response = self.client.post(
+            '/api/v1/portal/auth/register', data=json.dumps(Invalid_register_key), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'Invalid firstname key')
+        assert response.status_code == 400
 
     def test_login(self):
         """Test the vote json keys."""

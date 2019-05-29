@@ -41,3 +41,11 @@ def form_restrictions(data):
     if data not in form:
         return False
     return True
+
+def subjects(data):
+    """Restrict user inputs in a list."""
+
+    subject = ["R", "r", "NR", "nr"]
+    if data not in subject:
+        return False
+    return True

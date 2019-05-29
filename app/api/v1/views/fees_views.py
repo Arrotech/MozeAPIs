@@ -10,57 +10,55 @@ from flask_jwt_extended import jwt_required
 
 
 class Fees(Resource):
+    """School fees."""
 
     @jwt_required
     def post(self):
         """Accountant can create a new fee entry"""
-
         details = request.get_json()
-        fees = details['Fees']
-        fee_paid = details['fee_paid']
-        fee_balance = details['fee_balance']
+        admission_no = details['admission_no']
+        transaction_type = details['transaction_type']
+        transaction_no = details['transaction_no']
+        description = details['description']
+        amount = details['amount']
 
-        """if EvaluationModels().get_name(name):
-            return {"message": "Already evaluated"}"""
-
-        resp = FeesModels().save(fees, fee_paid, fee_balance)
+        deposit = FeesModels().save(admission_no,
+                                    transaction_type,
+                                    transaction_no,
+                                    description,
+                                    amount)
+        deposit = json.loads(deposit)
         return make_response(jsonify({
-            "message": "Entry made successsfully"
+            "status": "201",
+            "message": "Entry made successsfully",
+            "deposit": deposit
         }), 201)
-
-
-class GetFees(Resource):
 
     @jwt_required
     def get(self):
         """The students, staff and parents can view the fee balance."""
-
-        empty_fees = {}
-        fees = FeesModels().get_all_fees()
-        fees = json.loads(fees)
-        if fees:
-            return make_response(jsonify({
-                "message": "successfully retrieved"
-            }), 200)
         return make_response(jsonify({
-            "message": "success",
-            "commemts": empty_fees
+            "status": "200",
+            "message": "successfully retrieved",
+            "fees": json.loads(FeesModels().get_all_fees())
         }), 200)
 
 
 class GetFee(Resource):
+    """Individual fees."""
 
     @jwt_required
-    def get(self, fee_id):
+    def get(self, admission_no):
         """The students, staff and parents can view a single comment."""
-
-        fee = FeesModels().get_one_fee(fee_id)
+        fee = FeesModels().get_admission_no(admission_no)
         fee = json.loads(fee)
         if fee:
             return make_response(jsonify({
+                "status": "200",
                 "message": "successfully retrieved",
                 "Exam": fee
             }), 200)
         return make_response(jsonify({
+            "status": "404",
             "message": "Fees Not Found"
         }), 404)

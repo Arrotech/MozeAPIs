@@ -42,6 +42,8 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                 if (status === '200'){
                     if (user.email === 'admin@admin.com'){
                         localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('admission_no', data.admission_no);
                         onSuccess('Signed in successfully!');
                         window.location.replace('admin.html');
                     }

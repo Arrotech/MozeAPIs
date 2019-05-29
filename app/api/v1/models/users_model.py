@@ -23,7 +23,6 @@ class UsersModel(Database):
 
     def save(self):
         """Save information of the new user"""
-
         self.curr.execute(
             ''' INSERT INTO users(firstname, lastname, surname, admission_no, email, password, form, role)\
              VALUES('{}','{}','{}','{}','{}','{}','{}','{}') RETURNING firstname, lastname, surname, admission_no, email, password, form, role''' \
@@ -36,7 +35,6 @@ class UsersModel(Database):
 
     def get_users(self):
         """Fetch all users"""
-
         self.curr.execute(''' SELECT * FROM users''')
         users = self.curr.fetchall()
         self.conn.commit()
@@ -45,7 +43,6 @@ class UsersModel(Database):
 
     def get_user_by_id(self, user_id):
         """Fetch a single user by ID"""
-
         self.curr.execute(""" SELECT * FROM users WHERE user_id={}""".format(user_id))
         user = self.curr.fetchone()
         self.conn.commit()
@@ -54,7 +51,6 @@ class UsersModel(Database):
 
     def get_admission_no(self, admission_no):
         """Get user with specific username"""
-
         self.curr.execute(""" SELECT * FROM users WHERE admission_no=%s""", (admission_no,))
         user = self.curr.fetchone()
         self.conn.commit()
@@ -63,7 +59,6 @@ class UsersModel(Database):
 
     def get_email(self, email):
         """Get user with specific email."""
-
         self.curr.execute(''' SELECT * FROM users WHERE email=%s''', (email,))
         user = self.curr.fetchone()
         self.conn.commit()

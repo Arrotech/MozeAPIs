@@ -10,42 +10,52 @@ class FeesModels(Database):
 
     def __init__(
             self,
-            fees=None,
-            fee_paid=None,
-            fee_balance=None):
+            admission_no=None,
+            transaction_type=None,
+            transaction_no=None,
+            description=None,
+            amount=None):
         super().__init__()
-        self.fees = fees
-        self.fee_paid = fee_paid
-        self.fee_balance = fee_balance
+        self.admission_no = admission_no
+        self.transaction_type = transaction_type
+        self.transaction_no = transaction_no
+        self.description = description
+        self.amount = amount
 
-    def save(self, fees, fee_paid, fee_balance):
+    def save(self,
+             admission_no,
+             transaction_type,
+             transaction_no,
+             description,
+             amount):
+        print(admission_no, transaction_type, transaction_no, description, amount)
         """Create a new fee entry."""
-
-        print(fees, fee_paid, fee_balance)
         self.curr.execute(
-            ''' INSERT INTO fees(fees, fee_paid, fee_balance)\
-            VALUES({},{},{})\
-             RETURNING fees, fee_paid, fee_balance''' \
-                .format(fees, fee_paid, fee_balance))
+            ''' INSERT INTO fees(admission_no,
+                                 transaction_type,
+                                 transaction_no,
+                                 description,
+                                 amount)\
+            VALUES('{}','{}','{}','{}',{})\
+             RETURNING admission_no, transaction_type, transaction_no, description, amount''' \
+                .format(admission_no, transaction_type, transaction_no, description, amount))
         fees = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
-        return fees
+        return json.dumps(fees, default=str)
 
     def get_all_fees(self):
         """Fetch all comments"""
-
         self.curr.execute(''' SELECT * FROM fees''')
         fees = self.curr.fetchall()
         self.conn.commit()
         self.curr.close()
         return json.dumps(fees, default=str)
 
-    def get_one_fee(self, fee_id):
-        """Fetch a single comment"""
-
-        self.curr.execute(""" SELECT * FROM fees WHERE fee_id={}""".format(fee_id))
-        fee = self.curr.fetchone()
+    def get_admission_no(self, admission_no):
+        """Get an exam with specific admission no."""
+        self.curr.execute(""" SELECT * FROM fees WHERE admission_no=%s""", (admission_no,))
+        fees = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
-        return json.dumps(fee, default=str)
+        return json.dumps(fees, default=str)

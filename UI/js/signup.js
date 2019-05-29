@@ -46,6 +46,8 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
                 let message = data['message'];
                 if (status === '201'){
                     localStorage.setItem("user", JSON.stringify(data[0]));
+                    localStorage.setItem('user', data.user);
+                    localStorage.setItem('admission_no', data.admission_no);
                     window.location.replace('user.html');
                 }else{
                     raiseError(message);
