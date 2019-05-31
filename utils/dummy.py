@@ -16,7 +16,7 @@ admin_account = {
     "surname": "Gitundu",
     "admission_no": "NJCF1002",
     "email": "admin@admin.com",
-    "password": "Kevin20930988",
+    "password": "Admin20930988",
     "form": "1"
 }
 
@@ -170,8 +170,8 @@ entry = {
 }
 
 Invalid_exam_key = {
-"admissioo": "NJCS001",
-"maths": "87",
+"admission_no": "NJCS001",
+"math": "87",
 "english": "87",
 "kiswahili": "90",
 "chemistry": "78",
@@ -197,4 +197,51 @@ Invalid_exam_key_put = {
 "cre": "94",
 "agriculture": "85",
 "business": "88"
+}
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Subjects Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+new_subject = {
+"admission_no": "NJCF4001",
+"maths": "R",
+"english": "R",
+"kiswahili": "R",
+"chemistry": "R",
+"biology": "NR",
+"physics": "R",
+"history": "R",
+"geography": "R",
+"cre": "NR",
+"agriculture": "NR",
+"business": "R"
+}
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Books Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+add_book = {
+"admission_no": "NJCF4001",
+"author": "Ken Walibora",
+"title": "Damu Nyeusi",
+"subject": "kiswahili"
+}
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Id Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+add_student_info = {
+"surname": "Gitundu",
+"first_name": "Harun",
+"last_name": "Gachanja",
+"admission_no": "NJCF4001"
+}
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ FEES Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+add_fees = {
+"admission_no": "NJCF4001",
+"transaction_type": "ADP",
+"transaction_no": "176276",
+"description": "HELB",
+"amount": 25640
 }

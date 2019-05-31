@@ -1,16 +1,15 @@
 """Import flask module."""
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, Blueprint
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
 
-from app.api.v1.views.auth_views import SignIn, CreateAccount, User, Users
-from app.api.v1.views.evaluation_views import EvaluateTeachers, GetAllComments, GetOneComment
-from app.api.v1.views.exam_views import Exams, OneExam
-from app.api.v1.views.fees_views import Fees, GetFee
-from app.api.v1.views.library_views import Library, GetOneBook
-from app.api.v1.views.studentId_views import StudentId, GetId
-from app.api.v1.views.subjects_view import Subjects, OneSubject
+from app.api.v1.views.auth_views import auth_v1
+from app.api.v1.views.exam_views import exams_v1
+from app.api.v1.views.fees_views import fees_v1
+from app.api.v1.views.library_views import books_v1
+from app.api.v1.views.studentId_views import id_v1
+from app.api.v1.views.subjects_view import subjects_v1
 from app.config import app_config
 
 
@@ -57,23 +56,12 @@ def exam_app(config_name):
 
     api = Api(app)
 
-    api.add_resource(CreateAccount, '/api/v1/portal/auth/register')
-    api.add_resource(SignIn, '/api/v1/portal/auth/login')
-    api.add_resource(Exams, '/api/v1/portal/exams')
-    api.add_resource(OneExam, '/api/v1/portal/exams/<int:exam_id>')
-    api.add_resource(User, '/api/v1/portal/users/<int:user_id>')
-    api.add_resource(Users, '/api/v1/portal/users')
-    api.add_resource(EvaluateTeachers, '/api/v1/portal/evaluate')
-    api.add_resource(GetAllComments, '/api/v1/portal/evaluate')
-    api.add_resource(GetOneComment, '/api/v1/portal/evaluate/<int:comment_id>')
-    api.add_resource(Fees, '/api/v1/portal/fees')
-    api.add_resource(GetFee, '/api/v1/portal/fees/<string:admission_no>')
-    api.add_resource(Library, '/api/v1/portal/library')
-    api.add_resource(GetOneBook, '/api/v1/portal/library/<string:admission_no>')
-    api.add_resource(Subjects, '/api/v1/portal/subjects')
-    api.add_resource(OneSubject, '/api/v1/portal/subjects/<string:admission_no>')
-    api.add_resource(StudentId, '/api/v1/portal/id')
-    api.add_resource(GetId, '/api/v1/portal/id/<string:admission_no>')
+    app.register_blueprint(auth_v1, url_prefix='/api/v1/auth/')
+    app.register_blueprint(exams_v1, url_prefix='/api/v1/')
+    app.register_blueprint(fees_v1, url_prefix='/api/v1/')
+    app.register_blueprint(books_v1, url_prefix='/api/v1/')
+    app.register_blueprint(subjects_v1, url_prefix='/api/v1/')
+    app.register_blueprint(id_v1, url_prefix='/api/v1/')
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(405, method_not_allowed)
     app.register_error_handler(400, bad_request)

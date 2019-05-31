@@ -25,18 +25,18 @@ class BaseTest(unittest.TestCase):
         Database().destroy_table()
 
     def get_token(self):
-        self.client.post('/api/v1/portal/auth/register', data=json.dumps(create_account),
+        self.client.post('/api/v1/auth/register', data=json.dumps(create_account),
                          content_type='application/json')
-        resp = self.client.post('/api/v1/portal/auth/login', data=json.dumps(user_login),
+        resp = self.client.post('/api/v1/auth/login', data=json.dumps(user_login),
                                 content_type='application/json')
         access_token = json.loads(resp.get_data(as_text=True))['token']
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
         return auth_header
 
     def get_admin_token(self):
-        self.client.post('/api/v1/portal/auth/register', data=json.dumps(admin_account),
+        self.client.post('/api/v1/auth/register', data=json.dumps(admin_account),
                          content_type='application/json')
-        resp = self.client.post('/api/v1/portal/auth/login', data=json.dumps(admin_login),
+        resp = self.client.post('/api/v1/auth/login', data=json.dumps(admin_login),
                                 content_type='application/json')
         access_token = json.loads(resp.get_data(as_text=True))['token']
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}

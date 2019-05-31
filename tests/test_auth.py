@@ -12,7 +12,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(new_account), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Account created successfully!')
@@ -22,10 +22,10 @@ class TestUsersAccount(BaseTest):
         """Test fetching all offices that have been created."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
-            '/api/v1/portal/users', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/auth/users', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          "successfully retrieved")
@@ -35,10 +35,10 @@ class TestUsersAccount(BaseTest):
         """Test getting a specific party by id."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
-            '/api/v1/portal/users/1', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/auth/users/1', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          'successfully retrieved')
@@ -48,10 +48,10 @@ class TestUsersAccount(BaseTest):
         """Test getting a specific party by id."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            '/api/v1//auth/register', data=json.dumps(admin_account_test), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
-            '/api/v1/portal/users/100', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/auth/users/100', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          'User Not Found')
@@ -61,7 +61,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(email_already_exists), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(email_already_exists), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Email Already Exists!')
@@ -71,7 +71,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(Invalid_register_key), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(Invalid_register_key), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Invalid firstname key')
@@ -81,10 +81,10 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response1 = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(new_account1), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(new_account1), content_type='application/json',
             headers=self.get_token())
         response = self.client.post(
-            '/api/v1/portal/auth/login', data=json.dumps(new_login), content_type='application/json',
+            '/api/v1/auth/login', data=json.dumps(new_login), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Successfully logged in!')
@@ -94,7 +94,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/login', data=json.dumps(new_login), content_type='application/json',
+            '/api/v1/auth/login', data=json.dumps(new_login), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Invalid Email or Password')
@@ -104,7 +104,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(wrong_firstname), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(wrong_firstname), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'firstname is in wrong format')
@@ -114,7 +114,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(wrong_lastname), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(wrong_lastname), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'lastname is in wrong format')
@@ -124,7 +124,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(wrong_surname), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(wrong_surname), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'surname is in wrong format')
@@ -134,7 +134,7 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(wrong_form), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(wrong_form), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'select from 1, 2, 3 or 4')
@@ -144,8 +144,17 @@ class TestUsersAccount(BaseTest):
         """Test the vote json keys."""
 
         response = self.client.post(
-            '/api/v1/portal/auth/register', data=json.dumps(wrong_email), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(wrong_email), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Invalid Email Format!')
         assert response.status_code == 400
+
+    def test_unexisting_register_ur(self):
+        """Test when unexisting url is provided."""
+
+        response = self.client.get(
+            '/api/v2/party')
+        result = json.loads(response.data.decode())
+        assert response.status_code == 404
+        assert result['message'] == "resource not found"
