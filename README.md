@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/Arrotech/Portal.svg?branch=gh-pages)](https://travis-ci.org/Arrotech/Portal) [![Coverage Status](https://coveralls.io/repos/github/Arrotech/Portal/badge.svg?branch=ch-write-exam-tests-166324775)](https://coveralls.io/github/Arrotech/Portal?branch=ch-write-exam-tests-166324775) [![Maintainability](https://api.codeclimate.com/v1/badges/d18f71e29c6588ba2043/maintainability)](https://codeclimate.com/github/Arrotech/Portal/maintainability) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/) [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-
-
 **School Portal**
 
 Create a school portal with python, flask, postgres, HTML, CSS and JavaScript.
