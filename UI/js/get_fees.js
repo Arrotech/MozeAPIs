@@ -24,7 +24,7 @@ document.getElementById('getFees').addEventListener('click', getFees);
 
             token = window.localStorage.getItem('token');
 
-            fetch('http://localhost:5000/api/v1/portal/fees' ,{
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/fees' ,{
                 method: 'GET',
                 headers : {
                     Accept: 'application/json',

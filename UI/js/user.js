@@ -26,7 +26,7 @@ document.getElementById('userProfile').addEventListener('click', userProfile);
             user_id = window.localStorage.getItem('user_id');
 
 
-            fetch('http://localhost:5000/api/v1/portal/user/' + user_id,{
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/users/' + user_id,{
                 method: 'GET',
                 path: user_id,
                 headers : {
@@ -49,7 +49,7 @@ document.getElementById('userProfile').addEventListener('click', userProfile);
                                     <th>Details</th>
                                 </tr>
                                 <tr>
-                                    
+
                                     <td>Firstname</td>
                                     <td>${user.firstname}</td>
                                 </tr>

@@ -7,23 +7,16 @@
     <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/register.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body background="bookshop.jpg">
 <header>
-<nav>
-    <div class="logo-nav">
-        <ul>
-            <li style="padding-top: 0px;"><a href="index.html">
-                <div class="logo-image">
-                    <img src="img/logo.png">
-                </div>
-            </a></li>
-            <li><h1>SECONDARY SCHOOLS</h1></li>
-        </ul>
+    <div class="header">
+      <img src="img/logo.png">
+      <h1>SECONDARY SCHOOLS</h1>
     </div>
-</nav>
 </header>
 <nav>
     <div>
@@ -33,7 +26,8 @@
         </ul>
     </div>
 </nav>
-<div class="main-content">
+<div class="main">
+  <div class="left">
     <form id="postSignup">
         <div class="container">
             <div class="wrap-register">
@@ -75,53 +69,15 @@
                     <br>
                 </div>
                 <div>
-                    <button type="submit" class="signupbtn">SignUp</button>
+                    <input type="submit" value="SIGN UP">
                 </div>
                 <div id="snackbar">Just a moment...</div>
-                <div class="lnk">
-                    <p>Already have an account? <a href="login.html">Login</a></p>
-                </div>
+                <p class="forgot">Already have an account?<a href="login.html">Login</a></p>
             </div>
         </div>
     </form>
+  </div>
 </div>
 <script type="text/javascript" src="js/signup.js"></script>
-<footer>
-    <div class="footer-divide">
-        <div class="divide">
-            <h2>Contact Us</h2>
-            <p>Tel : (+254) 7 568 564</p>
-            <p>Email : arrotechdesign@gmail.com</p>
-        </div>
-        <div class="divide">
-            <h2>Elections</h2>
-            <p>Government offices</p>
-            <p>Candidates</p>
-        </div>
-        <div class="divide">
-            <h2>Social Media</h2>
-            <div class="social-footer">
-                <div class="social-footer-icons">
-                    <ul class="menu simple">
-                        <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"
-                                                                   aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.instagram.com/?hl=en"><i class="fa fa-instagram"
-                                                                          aria-hidden="true"></i></a></li>
-                        <li><a href="https://twitter.com/?lang=en"><i class="fa fa-twitter"
-                                                                      aria-hidden="true"></i></a></li>
-                        <li><a href="https://twitter.com/?lang=en"><i class="fa fa-youtube"
-                                                                      aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.google.com/"><i class="fa fa-google"
-                                                                 aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.google.com/"><i class="fa fa-pinterest"
-                                                                 aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <p>Copyright © 2019 ARROTECH Inc. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 </body>
-
 </html>
