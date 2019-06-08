@@ -1,4 +1,4 @@
-document.getElementById('postExams').addEventListener('submit', postExams);
+document.getElementById('updateSubjects').addEventListener('submit', updateSubjects);
 
     function callToast() {
 
@@ -19,11 +19,12 @@ document.getElementById('postExams').addEventListener('submit', postExams);
         callToast();
     }
 
-    function postExams(event){
+    function updateSubjects(event){
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
 
+            let exam_id = document.getElementById('exam_id').value;
             let admission_no = document.getElementById('admission_no').value;
             let maths = document.getElementById('maths').value;
             let english = document.getElementById('english').value;
@@ -38,22 +39,23 @@ document.getElementById('postExams').addEventListener('submit', postExams);
             let business = document.getElementById('business').value;
 
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams', {
-                method: 'POST',
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/subjects/' + admission_no, {
+                method: 'PUT',
+                path: admission_no,
                 headers : {
                 	Accept: 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
-                body:JSON.stringify({admission_no:admission_no, maths:maths, english:english, kiswahili:kiswahili, chemistry:chemistry, biology:biology, physics:physics, history:history, geography:geography, cre:cre, agriculture:agriculture, business:business})
+                body:JSON.stringify({exam_id:exam_id, admission_no:admission_no, maths:maths, english:english, kiswahili:kiswahili, chemistry:chemistry, biology:biology, physics:physics, history:history, geography:geography, cre:cre, agriculture:agriculture, business:business})
             }).then((res) => res.json())
             .then((data) =>  {
 
                 console.log(data);
                 let status = data['status'];
                 let message = data['message'];
-                if (status === '201'){
-                    onSuccess('Entry created successfully!');
+                if (status === '200'){
+                    onSuccess('Exam updated successfully!');
                 }else{
                     raiseError(message);
                 }

@@ -14,7 +14,7 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
     }
 
     function raiseError(msg){
-        
+
         document.getElementById('snackbar').innerText = msg
         callToast();
     }
@@ -25,7 +25,7 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
 
-            fetch('http://localhost:5000/api/v1/portal/auth/login', {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/auth/login', {
                 method: 'POST',
                 headers : {
                 	Accept: 'application/json',
@@ -62,8 +62,3 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                 console.log(err);
             })
         }
-
-
-
-
-

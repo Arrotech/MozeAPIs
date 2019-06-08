@@ -1,4 +1,4 @@
-document.getElementById('postExams').addEventListener('submit', postExams);
+document.getElementById('postSubjects').addEventListener('submit', postSubjects);
 
     function callToast() {
 
@@ -19,7 +19,7 @@ document.getElementById('postExams').addEventListener('submit', postExams);
         callToast();
     }
 
-    function postExams(event){
+    function postSubjects(event){
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
@@ -38,7 +38,7 @@ document.getElementById('postExams').addEventListener('submit', postExams);
             let business = document.getElementById('business').value;
 
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams', {
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/subjects', {
                 method: 'POST',
                 headers : {
                 	Accept: 'application/json',

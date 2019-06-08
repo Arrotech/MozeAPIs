@@ -24,7 +24,7 @@ document.getElementById('getRank').addEventListener('click', getRank);
 
             token = window.localStorage.getItem('token');
 
-            fetch('http://localhost:5000/api/v1/portal/exams' ,{
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams' ,{
                 method: 'GET',
                 headers : {
                     Accept: 'application/json',
