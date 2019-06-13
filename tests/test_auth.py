@@ -1,7 +1,7 @@
 import json
 
 from utils.dummy import admin_login, admin_account_test, admin_account, email_already_exists, Invalid_register_key, create_account, user_login, new_account, new_login, new_account1, wrong_firstname, \
-    wrong_lastname, wrong_surname, wrong_form, wrong_email
+    wrong_lastname, wrong_surname, wrong_form, wrong_email, password_length, invalid_password, wrong_role
 from .base_test import BaseTest
 
 
@@ -56,6 +56,16 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'],
                          'User Not Found')
         assert response1.status_code == 404
+
+    def test_password_length(self):
+        """Test the vote json keys."""
+
+        response = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(password_length), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'length of password should be atleast eight characters')
+        assert response.status_code == 400
 
     def test_email_exists(self):
         """Test the vote json keys."""
@@ -137,7 +147,17 @@ class TestUsersAccount(BaseTest):
             '/api/v1/auth/register', data=json.dumps(wrong_form), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
-        self.assertEqual(result['message'], 'select from 1, 2, 3 or 4')
+        self.assertEqual(result['message'], 'Form should be 1, 2, 3 or 4')
+        assert response.status_code == 400
+
+    def test_wrong_role(self):
+        """Test role input."""
+
+        response = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(wrong_role), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'role is in wrong format')
         assert response.status_code == 400
 
     def test_wrong_email(self):

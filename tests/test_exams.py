@@ -16,7 +16,7 @@ class TestExams(BaseTest):
         assert response.status_code == 201
 
     def test_get_exams(self):
-        """Test fetching all offices that have been created."""
+        """Test fetching all exams that have been created."""
 
         response = self.client.post(
             '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
@@ -28,17 +28,40 @@ class TestExams(BaseTest):
                          "successfully retrieved")
         assert response1.status_code == 200
 
-    def test_edit_exams(self):
-        """Test party json keys"""
+    def test_get_exam(self):
+        """Test getting a specific exam by admission_no."""
 
         response = self.client.post(
             '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
             headers=self.get_admin_token())
-        response1 = self.client.put(
-            '/api/v1/exams/1', data=json.dumps(entry), content_type='application/json', headers=self.get_admin_token())
+        response1 = self.client.get(
+            '/api/v1/exams/NJCF4001', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'], 'Scores successfully updated')
+        self.assertEqual(result['message'],
+                         'successfully retrieved')
         assert response1.status_code == 200
+
+    def test_get_unexisting_exam(self):
+        """Test getting unexisting specific exam by admission_no."""
+
+        response1 = self.client.get(
+            '/api/v1/exams/NJCF4057', content_type='application/json', headers=self.get_token())
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'],
+                         'Exam Not Found')
+        assert response1.status_code == 404
+
+    # def test_edit_exams(self):
+    #     """Test update exams."""
+    #
+    #     response = self.client.post(
+    #         '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
+    #         headers=self.get_admin_token())
+    #     response1 = self.client.put(
+    #         '/api/v1/exams/NJCF4001', data=json.dumps(entry), content_type='application/json', headers=self.get_admin_token())
+    #     result = json.loads(response1.data.decode())
+    #     self.assertEqual(result['message'], 'Scores successfully updated')
+    #     assert response1.status_code == 200
 
     def test_unexisting_exams_url(self):
         """Test when unexisting url is provided."""
@@ -49,32 +72,41 @@ class TestExams(BaseTest):
         assert response.status_code == 404
         assert result['message'] == "resource not found"
 
+    def test_method_not_allowed(self):
+        """Test method not allowed."""
 
-    def test_edit_unexisting_exams(self):
-        """Test party json keys"""
-        response1 = self.client.put(
-            '/api/v1/exams/1', data=json.dumps(entry), content_type='application/json', headers=self.get_admin_token())
-        result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'], 'Exam not found!')
-        assert response1.status_code == 404
+        response = self.client.put(
+            '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'method not allowed')
+        assert response.status_code == 405
+
+    # def test_edit_unexisting_exams(self):
+    #     """Test update unexisting exam."""
+    #     response1 = self.client.put(
+    #         '/api/v1/exams/NJCF4057', data=json.dumps(entry), content_type='application/json', headers=self.get_admin_token())
+    #     result = json.loads(response1.data.decode())
+    #     self.assertEqual(result['message'], 'Exam not found!')
+    #     assert response1.status_code == 404
 
     def test_delete_exams(self):
-        """Test getting a specific party by id."""
+        """Test deleting a specific exam."""
 
         response = self.client.post(
             '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
             headers=self.get_admin_token())
         response1 = self.client.delete(
-            '/api/v1/exams/1', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/exams/NJCF4001', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          'Exam deleted successfully')
         assert response1.status_code == 200
 
     def test_delete_unexisting_exams(self):
-        """Test getting a specific party by id."""
+        """Test deleting unexisting exam."""
         response1 = self.client.delete(
-            '/api/v1/exams/1', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/exams/NJCF4057', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          'Exam not found')

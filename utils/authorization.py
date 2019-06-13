@@ -16,8 +16,8 @@ def admin_required(func):
         try:
             cur_user = [
                 user for user in users if user['email'] == get_jwt_identity()]
-            user_email = cur_user[0]['email']
-            if user_email != 'admin@admin.com':
+            user_role = cur_user[0]['role']
+            if user_role != 'admin':
                 return {
                            'message': 'This activity can be completed by Admin only'}, 403  # Forbidden
             return func(*args, **kwargs)

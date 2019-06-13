@@ -119,6 +119,15 @@ class Database:
         self.conn.commit()
         self.curr.close()
 
+    def create_bursar(self):
+        """Create a deafult bursar admin user."""
+        query = "INSERT INTO users(firstname,lastname,surname,admission_no,email,password,form,role)\
+        VALUES('Lydiah','Mueni','Kisoo','NA','bursar@admin.com','pbkdf2:sha256:50000$NOztnXq6$1f5c21c9dc629aee0b8aa94e100c920d036f1bc5588439a6eda18457ed3ae234','5','admin')"
+
+        self.curr.execute(query)
+        self.conn.commit()
+        self.curr.close()
+
     def destroy_table(self):
         """Destroy tables"""
         exams = "DROP TABLE IF EXISTS  exams CASCADE"

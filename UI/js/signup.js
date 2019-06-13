@@ -30,14 +30,15 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
             let form = document.getElementById('form').value;
+            let role = document.getElementById('role').value;
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/auth/register', {
+            fetch('http://localhost:5000/api/v1/auth/register', {
                 method: 'POST',
                 headers : {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({firstname:firstname, lastname:lastname, surname:surname, admission_no:admission_no, email:email, password:password, form:form})
+                body:JSON.stringify({firstname:firstname, lastname:lastname, surname:surname, admission_no:admission_no, email:email, password:password, form:form, role:role})
             }).then((res) => res.json())
             .then((data) =>  {
 
