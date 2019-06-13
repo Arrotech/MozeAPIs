@@ -4,7 +4,7 @@ from flask import jsonify, make_response
 
 
 def check_register_keys(request):
-    res_keys = ['firstname', 'lastname', 'surname', 'admission_no', 'email', 'password', 'form']
+    res_keys = ['firstname', 'lastname', 'surname', 'admission_no', 'email', 'password', 'form', 'role']
     errors = []
     for key in res_keys:
         if not key in request.json:

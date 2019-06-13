@@ -69,5 +69,5 @@ def get_subject(admission_no):
         }), 200)
     return make_response(jsonify({
         "status": "404",
-        "message": "Exam Not Found"
+        "message": "Subject Not Found"
     }), 404)

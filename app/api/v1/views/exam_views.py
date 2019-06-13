@@ -62,11 +62,11 @@ def get_exams():
         "exams": json.loads(ExamsModel().get_all_exams())
     }), 200)
 
-@exams_v1.route('/exams/<int:exam_id>', methods=['GET'])
+@exams_v1.route('/exams/<string:admission_no>', methods=['GET'])
 @jwt_required
-def get_exam(exam_id):
+def get_exam(admission_no):
     """Fetch one exam."""
-    exam = ExamsModel().get_exam_by_id(exam_id)
+    exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
         return make_response(jsonify({
@@ -79,10 +79,10 @@ def get_exam(exam_id):
         "message": "Exam Not Found"
     }), 404)
 
-@exams_v1.route('/exams/<int:exam_id>', methods=['PUT'])
+@exams_v1.route('/exams/<string:admission_no>', methods=['PUT'])
 @jwt_required
 @admin_required
-def put(exam_id):
+def put(admission_no):
     """Update exams scores."""
     details = request.get_json()
     admission_no = details['admission_no']
@@ -123,15 +123,15 @@ def put(exam_id):
         "message": "Exam not found!"
     }), 404)
 
-@exams_v1.route('/exams/<int:exam_id>', methods=['DELETE'])
+@exams_v1.route('/exams/<string:admission_no>', methods=['DELETE'])
 @jwt_required
 @admin_required
-def delete(exam_id):
+def delete(admission_no):
     """Delete a specific exam."""
-    exam = ExamsModel().get_exam_by_id(exam_id)
+    exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
-        ExamsModel().delete_exam(exam_id)
+        ExamsModel().delete_exam(admission_no)
         return make_response(jsonify({
             "status": "200",
             "message": "Exam deleted successfully"

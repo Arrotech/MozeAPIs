@@ -20,30 +20,12 @@ def page_not_found(e):
         "message": "resource not found"
     }), 404)
 
-
 def method_not_allowed(e):
     """Capture Not Found error."""
     return make_response(jsonify({
         "status": "405",
         "message": "method not allowed"
     }), 405)
-
-
-def bad_request(e):
-    """Capture Not Found error."""
-    return make_response(jsonify({
-        "status": "400",
-        "message": "bad request"
-    }), 400)
-
-
-def internal_server_error(e):
-    """Capture Not Found error."""
-    return make_response(jsonify({
-        "status": "500",
-        "message": "internal server error"
-    }), 500)
-
 
 def exam_app(config_name):
     """Create the app."""
@@ -64,7 +46,5 @@ def exam_app(config_name):
     app.register_blueprint(id_v1, url_prefix='/api/v1/')
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(405, method_not_allowed)
-    app.register_error_handler(400, bad_request)
-    app.register_error_handler(500, internal_server_error)
 
     return app

@@ -3,7 +3,7 @@ import json
 from flask import make_response, jsonify, request, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required
 from flask_restful import Resource
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.api.v1.models.users_model import UsersModel
 from utils.authorization import admin_required
@@ -26,14 +26,19 @@ def signup():
     email = details['email']
     password = generate_password_hash(details['password'])
     form = details['form']
+    role = details['role']
     if details['firstname'].isalpha() is False:
         return raise_error(400, "firstname is in wrong format")
     if details['lastname'].isalpha() is False:
         return raise_error(400, "lastname is in wrong format")
     if details['surname'].isalpha() is False:
         return raise_error(400, "surname is in wrong format")
+    if details['role'].isalpha() is False:
+        return raise_error(400, "role is in wrong format")
     if not is_valid_email(email):
         return raise_error(400, "Invalid Email Format!")
+    if len(details['password']) < 8:
+        return raise_error(400, "length of password should be atleast eight characters")
     if UsersModel().get_admission_no(admission_no):
         return raise_error(400, "Admission Number Already Exists!")
     user_email = UsersModel().get_email(email)
@@ -41,8 +46,8 @@ def signup():
     if user_email:
         return raise_error(400, "Email Already Exists!")
     if (form_restrictions(form) is False):
-        return raise_error(400, "select from 1, 2, 3 or 4")
-    user = UsersModel(firstname, lastname, surname, admission_no, email, password, form).save()
+        return raise_error(400, "Form should be 1, 2, 3 or 4")
+    user = UsersModel(firstname, lastname, surname, admission_no, email, password, form, role).save()
     return make_response(jsonify({
         "message": "Account created successfully!",
         "status": "201",
@@ -69,6 +74,7 @@ def login():
         "status": "401",
         "message": "Invalid Email or Password"
     }), 401)
+
 
 @auth_v1.route('/users', methods=['GET'])
 @jwt_required

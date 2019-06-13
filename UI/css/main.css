@@ -104,3 +104,72 @@ header img{
   margin-left: auto;
   margin-right: auto;
 }
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ FOOTER SECTION @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+footer{
+	background-color:#d65050;
+	padding: 0px;
+	margin: 0px;
+	clear: both;
+	color: white;
+	display: flex;
+}
+
+footer h3, h5{
+  color: #d65050;
+}
+
+.footer-divide{
+	margin: 0;
+	display: flex;
+	padding: 0;
+   }
+
+.divide{
+	width: 25%;
+	background-color: #000000;
+	margin: 1px;
+	padding: 20px;
+	border-radius: 5px;
+	color: white;
+}
+
+.main-coln{
+	display: flex;
+	padding-top: 0;
+
+}
+
+.coln2{
+	padding-left: 40px;
+}
+
+.main-coln2{
+	padding-top: 1px;
+
+}
+
+/*==================== MEDIA QUERIES SECTION =====================*/
+
+@media (max-width: 600px){
+	footer{
+		display: inline;
+		padding-left:10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.divide{
+		width: 150px;
+	}
+
+	.skills-divide{
+		display: inline;
+
+	}
+	.main-coln{
+		display: inline;
+		float: left;
+	}

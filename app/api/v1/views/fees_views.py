@@ -4,7 +4,7 @@ from flask import make_response, jsonify, request, Blueprint
 from flask_restful import Resource
 
 from app.api.v1.models.fees_models import FeesModels
-from utils.authorization import admin_required
+from utils.bursar import bursar_required
 
 """from utils.utils import raise_error, check_order_keys"""
 from flask_jwt_extended import jwt_required
@@ -14,6 +14,7 @@ fees_v1 = Blueprint('fees_v1', __name__)
 
 @fees_v1.route('/fees', methods=['POST'])
 @jwt_required
+@bursar_required
 def add_fees():
     """Accountant can create a new fee entry"""
     details = request.get_json()
@@ -37,6 +38,7 @@ def add_fees():
 
 @fees_v1.route('/fees', methods=['GET'])
 @jwt_required
+@bursar_required
 def get_fees():
     """The students, staff and parents can view the fee balance."""
     return make_response(jsonify({
