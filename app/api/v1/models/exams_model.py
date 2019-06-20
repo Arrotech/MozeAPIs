@@ -80,7 +80,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def delete_exam(self, admission_no):
-        ''' Delete a specific exam by Admission Number.'''
+        ''' Delete an exam by Admission Number.'''
         self.curr.execute(""" DELETE FROM exams WHERE admission_no='{}'""", (admission_no,))
         self.conn.commit()
         self.curr.close()

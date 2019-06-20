@@ -131,7 +131,7 @@ def put(admission_no):
 @jwt_required
 @admin_required
 def delete(admission_no):
-    """Delete a specific exam by Admission Number."""
+    """Delete an exam by Admission Number."""
     exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
