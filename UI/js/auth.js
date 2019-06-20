@@ -16,7 +16,7 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
             event.preventDefault();
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/auth/login', {
+            fetch('http://localhost:5000/api/v1/auth/login', {
                 method: 'POST',
                 headers : {
                 	Accept: 'application/json',
@@ -37,10 +37,19 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                         onSuccess('Signed in successfully!');
                         window.location.replace('admin.html');
                     }
-                    else{
-                    localStorage.setItem('token', data.token);
-                    onSuccess('You are not authorized!');
-                    window.location.replace('user.html');
+                    if (user.email === 'bursar@admin.com'){
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('admission_no', data.admission_no);
+                        onSuccess('Signed in successfully!');
+                        window.location.replace('banker.html');
+                    }
+                    else {
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('admission_no', data.admission_no);
+                        onSuccess('Signed in successfully!');
+                        window.location.replace('user.html');
                     }
                 }else{
                     raiseError(message);

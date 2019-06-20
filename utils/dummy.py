@@ -20,7 +20,18 @@ new_account = {
     "firstname": "Kevin",
     "lastname": "Njoroge",
     "surname": "Gitundu",
-    "admission_no": "NJCF1002",
+    "admission_no": "NJCF4001",
+    "email": "gitundu.kevin@students.jcs.ac.ke",
+    "password": "Kevin20930988",
+    "form": "1",
+    "role": "student"
+}
+
+wrong_account_keys = {
+    "firname": "Kevin",
+    "lastname": "Njoroge",
+    "surname": "Gitundu",
+    "admission_no": "NJCF4001",
     "email": "gitundu.kevin@students.jcs.ac.ke",
     "password": "Kevin20930988",
     "form": "1",
@@ -28,8 +39,8 @@ new_account = {
 }
 
 admin_account = {
-    "firstname": "Kevin",
-    "lastname": "Njoroge",
+    "firstname": "Harun",
+    "lastname": "Gachanja",
     "surname": "Gitundu",
     "admission_no": "NJCF1002",
     "email": "admin@admin.com",
@@ -63,7 +74,7 @@ admin_account_test = {
     "firstname": "Kevin",
     "lastname": "Njoroge",
     "surname": "Gitundu",
-    "admission_no": "NA",
+    "admission_no": "NJCF4001",
     "email": "admin@admin.com",
     "password": "Kevin20930988",
     "form": "1",
@@ -207,6 +218,21 @@ wrong_role = {
 new_entry = {
 "admission_no": "NJCF4001",
 "maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+wrong_exam_keys = {
+"admission_no": "NJCF4001",
+"mhs": "87",
 "english": "87",
 "kiswahili": "90",
 "chemistry": "78",

@@ -27,18 +27,18 @@ def register_subjects():
     agriculture = details['agriculture']
     business = details['business']
 
-    res = SubjectsModel().save(admission_no,
-                               maths,
-                               english,
-                               kiswahili,
-                               chemistry,
-                               biology,
-                               physics,
-                               history,
-                               geography,
-                               cre,
-                               agriculture,
-                               business)
+    res = SubjectsModel(admission_no,
+                        maths,
+                        english,
+                        kiswahili,
+                        chemistry,
+                        biology,
+                        physics,
+                        history,
+                        geography,
+                        cre,
+                        agriculture,
+                        business).save()
     return make_response(jsonify({
         "status": "201",
         "message": "Subjects registered successfully!",

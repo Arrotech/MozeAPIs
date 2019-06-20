@@ -22,13 +22,7 @@ class FeesModels(Database):
         self.description = description
         self.amount = amount
 
-    def save(self,
-             admission_no,
-             transaction_type,
-             transaction_no,
-             description,
-             amount):
-        print(admission_no, transaction_type, transaction_no, description, amount)
+    def save(self):
         """Create a new fee entry."""
         self.curr.execute(
             ''' INSERT INTO fees(admission_no,
@@ -38,7 +32,7 @@ class FeesModels(Database):
                                  amount)\
             VALUES('{}','{}','{}','{}',{})\
              RETURNING admission_no, transaction_type, transaction_no, description, amount''' \
-                .format(admission_no, transaction_type, transaction_no, description, amount))
+                .format(self.admission_no, self.transaction_type, self.transaction_no, self.description, self.amount))
         fees = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()

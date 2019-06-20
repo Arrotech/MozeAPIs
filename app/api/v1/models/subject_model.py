@@ -36,15 +36,14 @@ class SubjectsModel(Database):
         self.agriculture = agriculture
         self.business = business
 
-    def save(self, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture,
-             business):
+    def save(self):
         """Create a new orders."""
         self.curr.execute(
             ''' INSERT INTO subjects(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
             VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
              RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
-                .format(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture,
-                        business))
+                .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre, self.agriculture,
+                        self.business))
         subjects = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
