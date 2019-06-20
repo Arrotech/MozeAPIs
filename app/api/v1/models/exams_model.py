@@ -38,17 +38,14 @@ class ExamsModel(Database):
         self.agriculture = agriculture
         self.business = business
 
-    def save(self, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-             agriculture, business):
+    def save(self):
         """Create a new orders."""
-        print(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-              agriculture, business)
         self.curr.execute(
             ''' INSERT INTO exams(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
             VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
              RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
-                .format(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-                        agriculture, business))
+                .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre,
+                        self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
@@ -70,14 +67,13 @@ class ExamsModel(Database):
         self.curr.close()
         return json.dumps(exam, default=str)
 
-    def update_scores(self, exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history,
-                      geography, cre, agriculture, business):
+    def update_scores(self, admission_no):
         """User can Change information of the office."""
         self.curr.execute("""UPDATE exams\
             SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
             WHERE admission_no='{}' RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
-                          .format(exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics,
-                                  history, geography, cre, agriculture, business))
+                          .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
+                                  self.history, self.geography, self.cre, self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
