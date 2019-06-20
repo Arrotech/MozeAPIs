@@ -19,10 +19,10 @@ def add_id():
     last_name = details['last_name']
     admission_no = details['admission_no']
 
-    studentId = StudentIdModel().save(surname,
-                                      first_name,
-                                      last_name,
-                                      admission_no)
+    studentId = StudentIdModel(surname,
+                               first_name,
+                               last_name,
+                               admission_no).save()
     studentId = json.loads(studentId)
     return make_response(jsonify({
         "status": "201",

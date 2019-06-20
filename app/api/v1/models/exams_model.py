@@ -38,24 +38,21 @@ class ExamsModel(Database):
         self.agriculture = agriculture
         self.business = business
 
-    def save(self, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-             agriculture, business):
-        """Create a new orders."""
-        print(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-              agriculture, business)
+    def save(self):
+        """Save new exam entry to the exams database."""
         self.curr.execute(
             ''' INSERT INTO exams(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
             VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
              RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
-                .format(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre,
-                        agriculture, business))
+                .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre,
+                        self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
         return json.dumps(exam, default=str)
 
     def get_all_exams(self):
-        """Fetch all orders"""
+        """Fetch all exam entries."""
         self.curr.execute(''' SELECT * FROM exams''')
         exams = self.curr.fetchall()
         self.conn.commit()
@@ -63,28 +60,27 @@ class ExamsModel(Database):
         return json.dumps(exams, default=str)
 
     def get_exam_by_admission_no(self, admission_no):
-        """Fetch a single exam"""
+        """Fetch a single exam by Admission Number."""
         self.curr.execute(""" SELECT * FROM exams WHERE admission_no='{}'""".format(admission_no))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
         return json.dumps(exam, default=str)
 
-    def update_scores(self, exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history,
-                      geography, cre, agriculture, business):
-        """User can Change information of the office."""
+    def update_scores(self, admission_no):
+        """Update a specific exam by Admission Number."""
         self.curr.execute("""UPDATE exams\
             SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
             WHERE admission_no='{}' RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
-                          .format(exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics,
-                                  history, geography, cre, agriculture, business))
+                          .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
+                                  self.history, self.geography, self.cre, self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
         return json.dumps(exam, default=str)
 
     def delete_exam(self, admission_no):
-        ''' Delete exam.'''
+        ''' Delete a specific exam by Admission Number.'''
         self.curr.execute(""" DELETE FROM exams WHERE admission_no='{}'""", (admission_no,))
         self.conn.commit()
         self.curr.close()

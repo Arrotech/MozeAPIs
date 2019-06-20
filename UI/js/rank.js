@@ -23,12 +23,11 @@ document.getElementById('getRank').addEventListener('click', getRank);
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
-            admission_no = window.localStorage.getItem('admission_no');
+            admission = window.localStorage.getItem('admission_no');
             exam_id = window.localStorage.getItem('exam_id');
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams/' + admission_no ,{
+            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams', {
                 method: 'GET',
-                path: admission_no,
                 headers : {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',

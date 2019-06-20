@@ -20,7 +20,6 @@ def add_book():
     author = details['author']
     title = details['title']
     subject = details['subject']
-
     book = LibraryModel().save(admission_no,
                                author,
                                title,

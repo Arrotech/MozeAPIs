@@ -6,6 +6,7 @@ from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 
 from app.api.v1.models.exams_model import ExamsModel
+from app.api.v1.models.users_model import UsersModel
 from utils.authorization import admin_required
 from utils.utils import check_exams_keys
 
@@ -15,7 +16,7 @@ exams_v1 = Blueprint('exams_v1', __name__)
 @jwt_required
 @admin_required
 def add_exam():
-    """Create a new exam entry."""
+    """Create a new exam entry for an existing user."""
     errors = check_exams_keys(request)
     if errors:
         return raise_error(400, "Invalid {} key".format(', '.join(errors)))
@@ -32,30 +33,35 @@ def add_exam():
     cre = details['cre']
     agriculture = details['agriculture']
     business = details['business']
-
-    exam = ExamsModel().save(admission_no,
-                             maths,
-                             english,
-                             kiswahili,
-                             chemistry,
-                             biology,
-                             physics,
-                             history,
-                             geography,
-                             cre,
-                             agriculture,
-                             business)
-    exam = json.loads(exam)
+    user = json.loads(UsersModel().get_admission_no(admission_no))
+    if user:
+        exam = ExamsModel(admission_no,
+                          maths,
+                          english,
+                          kiswahili,
+                          chemistry,
+                          biology,
+                          physics,
+                          history,
+                          geography,
+                          cre,
+                          agriculture,
+                          business).save()
+        exam = json.loads(exam)
+        return make_response(jsonify({
+            "status": "201",
+            "message": "Entry created successfully!",
+            "exams": exam
+        }), 201)
     return make_response(jsonify({
-        "status": "201",
-        "message": "Entry created successfully!",
-        "exams": exam
-    }), 201)
+        "status": "404",
+        "message": "Student with that Admission Number does not exitst."
+    }), 404)
 
 @exams_v1.route('/exams', methods=['GET'])
 @jwt_required
 def get_exams():
-    """Get all exams."""
+    """Get all exams entries."""
     return make_response(jsonify({
         "status": "200",
         "message": "successfully retrieved",
@@ -65,7 +71,7 @@ def get_exams():
 @exams_v1.route('/exams/<string:admission_no>', methods=['GET'])
 @jwt_required
 def get_exam(admission_no):
-    """Fetch one exam."""
+    """Fetch one exam by specific Admission Number."""
     exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
@@ -83,7 +89,7 @@ def get_exam(admission_no):
 @jwt_required
 @admin_required
 def put(admission_no):
-    """Update exams scores."""
+    """Update exams scores by specific Admission Number."""
     details = request.get_json()
     admission_no = details['admission_no']
     maths = details['maths']
@@ -98,19 +104,18 @@ def put(admission_no):
     agriculture = details['agriculture']
     business = details['business']
 
-    exam = ExamsModel().update_scores(admission_no,
-                                      maths,
-                                      english,
-                                      kiswahili,
-                                      chemistry,
-                                      biology,
-                                      physics,
-                                      history,
-                                      geography,
-                                      cre,
-                                      agriculture,
-                                      business,
-                                      exam_id)
+    exam = ExamsModel(admission_no,
+                      maths,
+                      english,
+                      kiswahili,
+                      chemistry,
+                      biology,
+                      physics,
+                      history,
+                      geography,
+                      cre,
+                      agriculture,
+                      business).update_scores()
     exam = json.loads(exam)
     if exam:
         return make_response(jsonify({
@@ -127,7 +132,7 @@ def put(admission_no):
 @jwt_required
 @admin_required
 def delete(admission_no):
-    """Delete a specific exam."""
+    """Delete a specific exam by Admission Number."""
     exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:

@@ -1,6 +1,6 @@
 import json
 
-from utils.dummy import add_fees
+from utils.dummy import add_fees, new_account, bursar_account_test
 from .base_test import BaseTest
 
 
@@ -8,6 +8,9 @@ class TestFees(BaseTest):
     """Test Fees."""
     def test_add_fees(self):
         """Test that the add fees endpoint works."""
+        response1 = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+            headers=self.get_token())
         response = self.client.post(
             '/api/v1/fees', data=json.dumps(add_fees), content_type='application/json',
             headers=self.get_bursar_token())
