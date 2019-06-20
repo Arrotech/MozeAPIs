@@ -52,7 +52,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def get_all_exams(self):
-        """Fetch all exam entries."""
+        """Fetch all exam entries for all students."""
         self.curr.execute(''' SELECT * FROM exams''')
         exams = self.curr.fetchall()
         self.conn.commit()

@@ -61,7 +61,7 @@ def add_exam():
 @exams_v1.route('/exams', methods=['GET'])
 @jwt_required
 def get_exams():
-    """Get all exams entries."""
+    """Get all exams entries for all students."""
     return make_response(jsonify({
         "status": "200",
         "message": "successfully retrieved",
