@@ -68,7 +68,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def update_scores(self, admission_no):
-        """Update a specific exam by Admission Number."""
+        """Update an exam by Admission Number."""
         self.curr.execute("""UPDATE exams\
             SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
             WHERE admission_no='{}' RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
