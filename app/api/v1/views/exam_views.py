@@ -71,7 +71,7 @@ def get_exams():
 @exams_v1.route('/exams/<string:admission_no>', methods=['GET'])
 @jwt_required
 def get_exam(admission_no):
-    """Fetch one exam by specific Admission Number."""
+    """Fetch an exam by specific Admission Number."""
     exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
