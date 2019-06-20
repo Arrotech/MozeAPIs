@@ -89,7 +89,7 @@ def get_exam(admission_no):
 @jwt_required
 @admin_required
 def put(admission_no):
-    """Update exams scores for a specific student by Admission Number."""
+    """Update an exam scores for a specific student by Admission Number."""
     details = request.get_json()
     admission_no = details['admission_no']
     maths = details['maths']
