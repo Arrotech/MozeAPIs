@@ -60,7 +60,7 @@ class ExamsModel(Database):
         return json.dumps(exams, default=str)
 
     def get_exam_by_admission_no(self, admission_no):
-        """Fetch a single exam by Admission Number."""
+        """Fetch an exam by Admission Number."""
         self.curr.execute(""" SELECT * FROM exams WHERE admission_no='{}'""".format(admission_no))
         exam = self.curr.fetchone()
         self.conn.commit()
