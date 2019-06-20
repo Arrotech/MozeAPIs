@@ -1,12 +1,10 @@
 import json
-
 from werkzeug.security import generate_password_hash
-
 from app.api.v1.models.database import Database
 
 
 class UsersModel(Database):
-    """Initialization."""
+    """Add a new user and retrieve User(s) by Id, Admission Number or Email."""
 
     def __init__(self, firstname=None, lastname=None, surname=None, admission_no=None, email=None, password=None,
                  form=None, role='student'):
@@ -22,7 +20,7 @@ class UsersModel(Database):
         self.role = role
 
     def save(self):
-        """Save information of the new user"""
+        """Save information of the new user."""
         self.curr.execute(
             ''' INSERT INTO users(firstname, lastname, surname, admission_no, email, password, form, role)\
              VALUES('{}','{}','{}','{}','{}','{}','{}','{}') RETURNING firstname, lastname, surname, admission_no, email, password, form, role''' \
@@ -34,31 +32,23 @@ class UsersModel(Database):
         return json.dumps(user, default=str)
 
     def get_users(self):
-        """Fetch all users"""
+        """Request for all users."""
         self.curr.execute(''' SELECT * FROM users''')
         users = self.curr.fetchall()
         self.conn.commit()
         self.curr.close()
         return json.dumps(users, default=str)
 
-    def get_user_by_id(self, user_id):
-        """Fetch a single user by ID"""
-        self.curr.execute(""" SELECT * FROM users WHERE user_id={}""".format(user_id))
+    def get_admission_no(self, admission_no):
+        """Request a single user with specific Admission Number."""
+        self.curr.execute(""" SELECT * FROM users WHERE admission_no=%s""", (admission_no,))
         user = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()
         return json.dumps(user, default=str)
 
-    def get_admission_no(self, admission_no):
-        """Get user with specific username"""
-        self.curr.execute(""" SELECT * FROM users WHERE admission_no=%s""", (admission_no,))
-        user = self.curr.fetchone()
-        self.conn.commit()
-        self.curr.close()
-        return user
-
     def get_email(self, email):
-        """Get user with specific email."""
+        """Request a single user with specific Email Address."""
         self.curr.execute(''' SELECT * FROM users WHERE email=%s''', (email,))
         user = self.curr.fetchone()
         self.conn.commit()

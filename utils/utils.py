@@ -19,13 +19,11 @@ def check_exams_keys(request):
             errors.append(key)
     return errors
 
-
 def raise_error(status, msg):
     return make_response(jsonify({
         "status": "400",
         "message": msg
     }), status)
-
 
 def is_valid_email(variable):
     """Check if email is a valid mail."""
@@ -34,13 +32,11 @@ def is_valid_email(variable):
         return True
     return False
 
-
 def is_valid_password(variable):
     """Check if password is a valid password."""
     if re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', variable):
         return True
     return False
-
 
 def form_restrictions(data):
     """Restrict user inputs in a list."""

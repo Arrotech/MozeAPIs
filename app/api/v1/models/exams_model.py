@@ -39,7 +39,7 @@ class ExamsModel(Database):
         self.business = business
 
     def save(self):
-        """Create a new orders."""
+        """Save new exam entry to the exams database."""
         self.curr.execute(
             ''' INSERT INTO exams(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
             VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
@@ -52,7 +52,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def get_all_exams(self):
-        """Fetch all orders"""
+        """Fetch all exam entries."""
         self.curr.execute(''' SELECT * FROM exams''')
         exams = self.curr.fetchall()
         self.conn.commit()
@@ -60,7 +60,7 @@ class ExamsModel(Database):
         return json.dumps(exams, default=str)
 
     def get_exam_by_admission_no(self, admission_no):
-        """Fetch a single exam"""
+        """Fetch a single exam by Admission Number."""
         self.curr.execute(""" SELECT * FROM exams WHERE admission_no='{}'""".format(admission_no))
         exam = self.curr.fetchone()
         self.conn.commit()
@@ -68,7 +68,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def update_scores(self, admission_no):
-        """User can Change information of the office."""
+        """Update a specific exam by Admission Number."""
         self.curr.execute("""UPDATE exams\
             SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
             WHERE admission_no='{}' RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
@@ -80,7 +80,7 @@ class ExamsModel(Database):
         return json.dumps(exam, default=str)
 
     def delete_exam(self, admission_no):
-        ''' Delete exam.'''
+        ''' Delete a specific exam by Admission Number.'''
         self.curr.execute(""" DELETE FROM exams WHERE admission_no='{}'""", (admission_no,))
         self.conn.commit()
         self.curr.close()

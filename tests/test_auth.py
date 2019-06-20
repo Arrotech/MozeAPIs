@@ -1,7 +1,7 @@
 import json
 
 from utils.dummy import admin_login, admin_account_test, admin_account, email_already_exists, Invalid_register_key, create_account, user_login, new_account, new_login, new_account1, wrong_firstname, \
-    wrong_lastname, wrong_surname, wrong_form, wrong_email, password_length, invalid_password, wrong_role
+    wrong_lastname, wrong_surname, wrong_form, wrong_email, password_length, invalid_password, wrong_role, wrong_account_keys
 from .base_test import BaseTest
 
 
@@ -31,18 +31,19 @@ class TestUsersAccount(BaseTest):
                          "successfully retrieved")
         assert response1.status_code == 200
 
-    def test_get_user_by_admission(self):
+    def test_get_user_by_admission_no(self):
         """Test getting a specific party by id."""
 
         response = self.client.post(
             '/api/v1/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
-            '/api/v1/auth/users/1', content_type='application/json', headers=self.get_admin_token())
+            '/api/v1/auth/users/NJCF4001', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'],
                          'successfully retrieved')
         assert response1.status_code == 200
+
 
     def test_get_user_not_found(self):
         """Test getting a specific party by id."""
@@ -56,6 +57,16 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'],
                          'User Not Found')
         assert response1.status_code == 404
+
+    def test_create_account_keys(self):
+        """Test the vote json keys."""
+
+        response = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(wrong_account_keys), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'Invalid firstname key')
+        assert response.status_code == 400
 
     def test_password_length(self):
         """Test the vote json keys."""

@@ -13,13 +13,13 @@ class StudentIdModel(Database):
         self.last_name = last_name
         self.admission_no = admission_no
 
-    def save(self, surname, first_name, last_name, admission_no):
+    def save(self):
         """Save information of the new user"""
 
         self.curr.execute(
             ''' INSERT INTO studentId(surname, first_name, last_name, admission_no)\
              VALUES('{}','{}','{}','{}') RETURNING surname, first_name, last_name, admission_no''' \
-                .format(surname, first_name, last_name, admission_no))
+                .format(self.surname, self.first_name, self.last_name, self.admission_no))
         studentId = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()

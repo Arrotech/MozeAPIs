@@ -6,6 +6,7 @@ from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 
 from app.api.v1.models.exams_model import ExamsModel
+from app.api.v1.models.users_model import UsersModel
 from utils.authorization import admin_required
 from utils.utils import check_exams_keys
 
@@ -32,29 +33,35 @@ def add_exam():
     cre = details['cre']
     agriculture = details['agriculture']
     business = details['business']
-    exam = ExamsModel(admission_no,
-                      maths,
-                      english,
-                      kiswahili,
-                      chemistry,
-                      biology,
-                      physics,
-                      history,
-                      geography,
-                      cre,
-                      agriculture,
-                      business).save()
-    exam = json.loads(exam)
+    user = json.loads(UsersModel().get_admission_no(admission_no))
+    if user:
+        exam = ExamsModel(admission_no,
+                          maths,
+                          english,
+                          kiswahili,
+                          chemistry,
+                          biology,
+                          physics,
+                          history,
+                          geography,
+                          cre,
+                          agriculture,
+                          business).save()
+        exam = json.loads(exam)
+        return make_response(jsonify({
+            "status": "201",
+            "message": "Entry created successfully!",
+            "exams": exam
+        }), 201)
     return make_response(jsonify({
-        "status": "201",
-        "message": "Entry created successfully!",
-        "exams": exam
-    }), 201)
+        "status": "404",
+        "message": "Student with that Admission Number does not exitst."
+    }), 404)
 
 @exams_v1.route('/exams', methods=['GET'])
 @jwt_required
 def get_exams():
-    """Get all exams."""
+    """Get all exams entries."""
     return make_response(jsonify({
         "status": "200",
         "message": "successfully retrieved",
@@ -64,7 +71,7 @@ def get_exams():
 @exams_v1.route('/exams/<string:admission_no>', methods=['GET'])
 @jwt_required
 def get_exam(admission_no):
-    """Fetch an exam for a specific student by Admission Number."""
+    """Fetch one exam by specific Admission Number."""
     exam = ExamsModel().get_exam_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
