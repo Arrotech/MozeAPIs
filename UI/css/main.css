@@ -79,10 +79,18 @@ header img{
   color: #818181;
   display: block;
   font-weight: bold;
+  margin-left: 25px;
+}
+
+.leftnav img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
 }
 
 .leftnav a:hover {
-  color: #f1f1f1;
+  color: #d65050;
 }
 
 .main {

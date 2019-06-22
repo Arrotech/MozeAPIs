@@ -24,7 +24,7 @@ document.getElementById('getSubjects').addEventListener('click', getSubjects);
 
             token = window.localStorage.getItem('token');
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/subjects' ,{
+            fetch('http://localhost:5000/api/v1/subjects' ,{
                 method: 'GET',
                 headers : {
                     Accept: 'application/json',

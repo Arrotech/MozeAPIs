@@ -49,6 +49,7 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
                     localStorage.setItem("user", JSON.stringify(data[0]));
                     localStorage.setItem('user', data.user);
                     localStorage.setItem('admission_no', data.admission_no);
+                    localStorage.setItem('email', data.email);
                     window.location.replace('user.html');
                 }else{
                     raiseError(message);

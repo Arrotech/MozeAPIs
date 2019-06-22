@@ -13,10 +13,12 @@ img{
   width: 100%;
 }
 .main{
-  height:620px;
+  height:660px;
   width:400px;
   /*border:1px solid #fff;*/
   margin:1% auto;
+  margin-top: 50px;
+  clear: both;
 }
 .main div{
   display: inline;
@@ -51,7 +53,7 @@ img{
 .left form input{
   text-align:center;
   width:70%;
-  height:25px;
+  height:20px;
   margin-bottom:10px;
   border:none;
   border:1px solid #F8F8F8;

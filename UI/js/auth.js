@@ -34,13 +34,15 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('admission_no', data.admission_no);
+                        localStorage.setItem('email', data.email);
                         onSuccess('Signed in successfully!');
                         window.location.replace('admin.html');
                     }
-                    if (user.email === 'bursar@admin.com'){
+                    else if (user.email === 'bursar@admin.com'){
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('admission_no', data.admission_no);
+                        localStorage.setItem('email', data.email);
                         onSuccess('Signed in successfully!');
                         window.location.replace('banker.html');
                     }
@@ -48,6 +50,7 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('admission_no', data.admission_no);
+                        localStorage.setItem('email', data.email);
                         onSuccess('Signed in successfully!');
                         window.location.replace('user.html');
                     }

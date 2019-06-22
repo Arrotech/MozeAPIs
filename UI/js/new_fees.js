@@ -30,8 +30,9 @@ document.getElementById('postFees').addEventListener('submit', postFees);
             let description = document.getElementById('description').value;
             let amount = document.getElementById('amount').value;
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/fees', {
+            fetch('http://localhost:5000/api/v1/fees', {
                 method: 'POST',
+                CORS: 'no-cors',
                 headers : {
                 	Accept: 'application/json',
                     'Content-Type': 'application/json',
