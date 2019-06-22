@@ -38,7 +38,7 @@ document.getElementById('postExams').addEventListener('submit', postExams);
             let business = document.getElementById('business').value;
 
 
-            fetch('http://arrotech-school-portal.herokuapp.com/api/v1/exams', {
+            fetch('http://localhost:5000/api/v1/exams', {
                 method: 'POST',
                 headers : {
                 	Accept: 'application/json',
