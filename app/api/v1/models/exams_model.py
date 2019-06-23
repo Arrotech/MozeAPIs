@@ -1,7 +1,10 @@
 """Json package."""
 import json
 
+from datetime import datetime
+
 from app.api.v1.models.database import Database
+
 
 Database().create_table()
 
@@ -12,6 +15,9 @@ class ExamsModel(Database):
     def __init__(
             self,
             admission_no=None,
+            term=None,
+            form=None,
+            type=None,
             maths=None,
             english=None,
             kiswahili=None,
@@ -26,6 +32,9 @@ class ExamsModel(Database):
         """Initialization."""
         super().__init__()
         self.admission_no = admission_no
+        self.term = term
+        self.form = form
+        self.type = type
         self.maths = maths
         self.english = english
         self.kiswahili = kiswahili
@@ -41,10 +50,10 @@ class ExamsModel(Database):
     def save(self):
         """Save new exam entry to the exams database."""
         self.curr.execute(
-            ''' INSERT INTO exams(admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
-            VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
-             RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
-                .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre,
+            ''' INSERT INTO exams(admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
+            VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
+             RETURNING admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
+                .format(self.admission_no, self.term, self.form, self.type, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre,
                         self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
@@ -70,9 +79,9 @@ class ExamsModel(Database):
     def update_scores(self, admission_no):
         """Update an exam by Admission Number."""
         self.curr.execute("""UPDATE exams\
-            SET admission_no='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
-            WHERE admission_no='{}' RETURNING admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
-                          .format(self.admission_no, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
+            SET admission_no='{}', term='{}', form='{}', type='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
+            WHERE admission_no='{}' RETURNING admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
+                          .format(self.admission_no, self.term, self.form, self.type, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
                                   self.history, self.geography, self.cre, self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
