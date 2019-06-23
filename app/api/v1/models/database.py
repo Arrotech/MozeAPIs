@@ -35,6 +35,9 @@ class Database:
             CREATE TABLE IF NOT EXISTS exams(
                 exam_id serial PRIMARY KEY,
                 admission_no varchar NOT NULL,
+                term varchar NOT NULL,
+                form numeric NOT NULL,
+                type varchar NOT NULL,
                 maths numeric NOT NULL,
                 english numeric NOT NULL,
                 kiswahili numeric NOT NULL,
@@ -45,7 +48,8 @@ class Database:
                 geography numeric NOT NULL,
                 cre numeric NOT NULL,
                 agriculture numeric NOT NULL,
-                business numeric NOT NULL
+                business numeric NOT NULL,
+                date TIMESTAMP
             )""",
             """
             CREATE TABLE IF NOT EXISTS evaluation(

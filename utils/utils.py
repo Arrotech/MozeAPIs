@@ -12,7 +12,7 @@ def check_register_keys(request):
     return errors
 
 def check_exams_keys(request):
-    res_keys = ['admission_no', 'maths', 'english', 'kiswahili', 'chemistry', 'biology', 'physics', 'history', 'geography', 'cre', 'agriculture', 'business']
+    res_keys = ['admission_no', 'term', 'form', 'type', 'maths', 'english', 'kiswahili', 'chemistry', 'biology', 'physics', 'history', 'geography', 'cre', 'agriculture', 'business']
     errors = []
     for key in res_keys:
         if not key in request.json:
@@ -43,6 +43,22 @@ def form_restrictions(data):
 
     form = ["1", "2", "3", "4"]
     if data not in form:
+        return False
+    return True
+
+def term_restrictions(data):
+    """Restrict user inputs in a list."""
+
+    term = ["1st", "2nd", "3rd", "1ST", "2ND", "3RD"]
+    if data not in term:
+        return False
+    return True
+
+def type_restrictions(data):
+    """Restrict user inputs in a list."""
+
+    type = ["main", "MAIN", "CAT", "cat"]
+    if data not in type:
         return False
     return True
 

@@ -1,6 +1,6 @@
 import json
 
-from utils.dummy import entry, new_entry, Invalid_exam_key, Invalid_exam_key_put, new_account, wrong_exam_keys, admin_account_test
+from utils.dummy import entry, new_entry, Invalid_exam_key, Invalid_exam_key_put, new_account, wrong_exam_keys, admin_account_test, term_restrictions, form_restrictions, type_restrictions
 from .base_test import BaseTest
 
 
@@ -17,6 +17,42 @@ class TestExams(BaseTest):
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Entry created successfully!')
         assert response.status_code == 201
+
+    # def test_term_restrictions(self):
+    #     """Test that term restrictions."""
+    #     response1 = self.client.post(
+    #         '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+    #         headers=self.get_token())
+    #     response = self.client.post(
+    #         '/api/v1/exams', data=json.dumps(term_restrictions), content_type='application/json',
+    #         headers=self.get_admin_token())
+    #     result = json.loads(response.data.decode())
+    #     self.assertEqual(result['message'], 'Term should be either 1st, 2nd, 3rd, 1ST, 2ND, or 3RD')
+    #     assert response.status_code == 400
+    #
+    # def test_form_restrictions(self):
+    #     """Test that term restrictions."""
+    #     response1 = self.client.post(
+    #         '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+    #         headers=self.get_token())
+    #     response = self.client.post(
+    #         '/api/v1/exams', data=json.dumps(form_restrictions), content_type='application/json',
+    #         headers=self.get_admin_token())
+    #     result = json.loads(response.data.decode())
+    #     self.assertEqual(result['message'], 'Form should be 1, 2, 3 or 4')
+    #     assert response.status_code == 400
+    #
+    # def test_type_restrictions(self):
+    #     """Test that term restrictions."""
+    #     response1 = self.client.post(
+    #         '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+    #         headers=self.get_token())
+    #     response = self.client.post(
+    #         '/api/v1/exams', data=json.dumps(type_restrictions), content_type='application/json',
+    #         headers=self.get_admin_token())
+    #     result = json.loads(response.data.decode())
+    #     self.assertEqual(result['message'], 'Type should be either MAIN, main, CAT, or cat')
+    #     assert response.status_code == 400
 
     def test_add_exams_with_unexisting_user(self):
         """Test that the add exams endpoint works."""

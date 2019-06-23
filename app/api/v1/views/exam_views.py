@@ -8,7 +8,7 @@ from flask_restful import Resource
 from app.api.v1.models.exams_model import ExamsModel
 from app.api.v1.models.users_model import UsersModel
 from utils.authorization import admin_required
-from utils.utils import check_exams_keys
+from utils.utils import check_exams_keys, form_restrictions, term_restrictions, type_restrictions
 
 exams_v1 = Blueprint('exams_v1', __name__)
 
@@ -22,6 +22,9 @@ def add_exam():
         return raise_error(400, "Invalid {} key".format(', '.join(errors)))
     details = request.get_json()
     admission_no = details['admission_no']
+    term = details['term']
+    form = details['form']
+    type = details['type']
     maths = details['maths']
     english = details['english']
     kiswahili = details['kiswahili']
@@ -33,9 +36,18 @@ def add_exam():
     cre = details['cre']
     agriculture = details['agriculture']
     business = details['business']
+    if (form_restrictions(form) is False):
+        return raise_error(400, "Form should be 1, 2, 3 or 4")
+    if (term_restrictions(term) is False):
+        return raise_error(400, "Term should be either 1st, 2nd, 3rd, 1ST, 2ND, or 3RD")
+    if (type_restrictions(type) is False):
+        return raise_error(400, "Type should be either MAIN, main, CAT, or cat")
     user = json.loads(UsersModel().get_admission_no(admission_no))
     if user:
         exam = ExamsModel(admission_no,
+                          term,
+                          form,
+                          type,
                           maths,
                           english,
                           kiswahili,
@@ -92,6 +104,9 @@ def put(admission_no):
     """Update an exam scores for a specific student by Admission Number."""
     details = request.get_json()
     admission_no = details['admission_no']
+    term = details['term']
+    form = details['form']
+    type = details['type']
     maths = details['maths']
     english = details['english']
     kiswahili = details['kiswahili']
@@ -104,6 +119,9 @@ def put(admission_no):
     agriculture = details['agriculture']
     business = details['business']
     exam = ExamsModel(admission_no,
+                      term,
+                      form,
+                      type,
                       maths,
                       english,
                       kiswahili,

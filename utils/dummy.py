@@ -217,6 +217,63 @@ wrong_role = {
 
 new_entry = {
 "admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+term_restrictions = {
+"admission_no": "NJCF4001",
+"term": "first",
+"form": "4",
+"type": "main",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+form_restrictions = {
+"admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
+"maths": "87",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "76",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
+type_restrictions = {
+"admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
 "maths": "87",
 "english": "87",
 "kiswahili": "90",
@@ -232,6 +289,9 @@ new_entry = {
 
 wrong_exam_keys = {
 "admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
 "mhs": "87",
 "english": "87",
 "kiswahili": "90",
@@ -247,6 +307,9 @@ wrong_exam_keys = {
 
 entry = {
 "admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
 "maths": "98",
 "english": "87",
 "kiswahili": "90",
@@ -262,6 +325,9 @@ entry = {
 
 Invalid_exam_key = {
 "admiion_no": "NJCS001",
+"term": "1st",
+"form": "4",
+"type": "main",
 "math": "87",
 "english": "87",
 "kiswahili": "90",
@@ -277,6 +343,9 @@ Invalid_exam_key = {
 
 Invalid_exam_key_put = {
 "admissioo": "NJCS001",
+"term": "1st",
+"form": "4",
+"type": "main",
 "maths": "87",
 "english": "87",
 "kiswahili": "90",
