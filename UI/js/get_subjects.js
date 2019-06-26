@@ -1,5 +1,3 @@
-document.getElementById('getSubjects').addEventListener('click', getSubjects);
-
     function callToast() {
 
       var x = document.getElementById("snackbar");
@@ -19,13 +17,15 @@ document.getElementById('getSubjects').addEventListener('click', getSubjects);
         callToast();
     }
 
-    function getSubjects(event){
+    document.getElementById('getSubjects').onclick = () => {
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
+            admission = window.localStorage.getItem('admission_no');
 
-            fetch('http://localhost:5000/api/v1/subjects' ,{
+            fetch('http://localhost:5000/api/v1/subjects/' + admission ,{
                 method: 'GET',
+                path: admission,
                 headers : {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -34,15 +34,10 @@ document.getElementById('getSubjects').addEventListener('click', getSubjects);
             })
             .then((res) => res.json())
             .then((data) => {
-                let output = `<h3 style="margin-left: 10px;"> Exams grouped by Subjects.</h3>`;
-                data.subjects.forEach(subject => {
                     let status = data['status'];
                     let message = data['message'];
-                    const { subject_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = subject;
-                        output += `
+                        output = `
                             <div>
-                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${subject.admission_no}</h4>
-                                <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Exam ID: ${subject.subject_id}</h4>
                                 <table>
                                     <tr>
                                         <th>Subjects</th>
@@ -51,47 +46,47 @@ document.getElementById('getSubjects').addEventListener('click', getSubjects);
                                     <tr>
 
                                         <td>Mathematics</td>
-                                        <td>${subject.maths}</td>
+                                        <td>${data.subject.maths}</td>
                                     </tr>
                                     <tr>
                                         <td>English</td>
-                                        <td>${subject.english}</td>
+                                        <td>${data.subject.english}</td>
                                     </tr>
                                     <tr>
                                         <td>Kiswahili</td>
-                                        <td>${subject.kiswahili}</td>
+                                        <td>${data.subject.kiswahili}</td>
                                     </tr>
                                     <tr>
                                         <td>Chemistry</td>
-                                        <td>${subject.chemistry}</td>
+                                        <td>${data.subject.chemistry}</td>
                                     </tr>
                                     <tr>
                                         <td>Biology</td>
-                                        <td>${subject.biology}</td>
+                                        <td>${data.subject.biology}</td>
                                     </tr>
                                     <tr>
                                         <td>Physics</td>
-                                        <td>${subject.physics}</td>
+                                        <td>${data.subject.physics}</td>
                                     </tr>
                                     <tr>
                                         <td>History</td>
-                                        <td>${subject.history}</td>
+                                        <td>${data.subject.history}</td>
                                     </tr>
                                     <tr>
                                         <td>Geography</td>
-                                        <td>${subject.geography}</td>
+                                        <td>${data.subject.geography}</td>
                                     </tr>
                                     <tr>
                                         <td>Cre</td>
-                                        <td>${subject.cre}</td>
+                                        <td>${data.subject.cre}</td>
                                     </tr>
                                     <tr>
                                         <td>Agriculture</td>
-                                        <td>${subject.agriculture}</td>
+                                        <td>${data.subject.agriculture}</td>
                                     </tr>
                                     <tr>
                                         <td>Business</td>
-                                        <td>${subject.business}</td>
+                                        <td>${data.subject.business}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -101,7 +96,6 @@ document.getElementById('getSubjects').addEventListener('click', getSubjects);
                     }else{
                         raiseError(message);
                     }
-                    });
                     })
             .catch((err)=>{
                 raiseError("Please check your internet connection and try again!");
