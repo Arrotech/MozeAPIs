@@ -13,21 +13,15 @@ def create():
 
     Database().create_table()
 
-
 @app.cli.command()
 def admin():
     Database().create_admin()
-
-@app.cli.command()
-def bursar():
-    Database().create_bursar()
 
 @app.cli.command()
 def destroy():
     """Destroy tables."""
 
     Database().destroy_table()
-
 
 if __name__ == '__main__':
     app.run(debug=True)

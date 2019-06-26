@@ -1,4 +1,4 @@
-document.getElementById('updateFees').addEventListener('submit', updateFees);
+document.getElementById('updateBooks').addEventListener('submit', updateBooks);
 
     function callToast() {
 
@@ -19,20 +19,19 @@ document.getElementById('updateFees').addEventListener('submit', updateFees);
         callToast();
     }
 
-    function updateFees(event){
+    function updateBooks(event){
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
 
 
             let admission_no = document.getElementById('admission_no').value;
-            let transaction_type = document.getElementById('transaction_type').value;
-            let transaction_no = document.getElementById('transaction_no').value;
-            let description = document.getElementById('description').value;
-            let amount = document.getElementById('amount').value;
+            let author = document.getElementById('author').value;
+            let title = document.getElementById('title').value;
+            let subject = document.getElementById('subject').value;
 
 
-            fetch('http://localhost:5000/api/v1/fees/' + admission_no, {
+            fetch('http://localhost:5000/api/v1/books/' + admission_no, {
                 method: 'PUT',
                 path: admission_no,
                 headers : {
@@ -40,7 +39,7 @@ document.getElementById('updateFees').addEventListener('submit', updateFees);
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
-                body:JSON.stringify({admission_no:admission_no, transaction_type:transaction_type, transaction_no:transaction_no, description:description, amount:amount})
+                body:JSON.stringify({admission_no:admission_no, author:author, title:title, subject:subject})
             }).then((res) => res.json())
             .then((data) =>  {
 
@@ -48,7 +47,7 @@ document.getElementById('updateFees').addEventListener('submit', updateFees);
                 let status = data['status'];
                 let message = data['message'];
                 if (status === '200'){
-                    onSuccess('Fees updated successfully!');
+                    onSuccess('Books updated successfully!');
                 }else{
                     raiseError(message);
                 }
