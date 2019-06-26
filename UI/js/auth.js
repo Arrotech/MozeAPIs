@@ -33,16 +33,16 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                     if (user.email === 'admin@admin.com'){
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('user', data.user);
-                        localStorage.setItem('admission_no', data.admission_no);
-                        localStorage.setItem('email', data.email);
+                        localStorage.setItem('admission_no', data.user.admission_no);
+                        localStorage.setItem('email', data.user.email);
                         onSuccess('Signed in successfully!');
                         window.location.replace('admin.html');
                     }
                     else {
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('token', data.token);
-                        localStorage.setItem('admission_no', data.admission_no);
-                        localStorage.setItem('email', data.email);
+                        localStorage.setItem('admission_no', data.user.admission_no);
+                        localStorage.setItem('email', data.user.email);
                         onSuccess('Signed in successfully!');
                         window.location.replace('user.html');
                     }
