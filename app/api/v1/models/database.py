@@ -62,16 +62,6 @@ class Database:
                 comment varchar NOT NULL
             )""",
             """
-            CREATE TABLE IF NOT EXISTS fees(
-                fee_id serial PRIMARY KEY,
-                admission_no varchar NOT NULL,
-                transaction_type varchar NOT NULL,
-                transaction_no varchar NOT NULL,
-                description varchar NOT NULL,
-                amount numeric NOT NULL
-            )
-            """,
-            """
             CREATE TABLE IF NOT EXISTS library(
                 book_id serial PRIMARY KEY,
                 admission_no varchar NOT NULL,
@@ -118,15 +108,6 @@ class Database:
         """Create a deafult admin user."""
         query = "INSERT INTO users(firstname,lastname,surname,admission_no,email,password,form,role)\
         VALUES('Harun','Gachanja','Gitundu','NA','admin@admin.com','pbkdf2:sha256:50000$aNlgJU9E$bf5d2dc9783e38f905618aacd50eb55b098f282dc6b03834aee7c4f80a9100e8','5','admin')"
-
-        self.curr.execute(query)
-        self.conn.commit()
-        self.curr.close()
-
-    def create_bursar(self):
-        """Create a deafult bursar admin user."""
-        query = "INSERT INTO users(firstname,lastname,surname,admission_no,email,password,form,role)\
-        VALUES('Lydiah','Mueni','Kisoo','NA','bursar@admin.com','pbkdf2:sha256:50000$NOztnXq6$1f5c21c9dc629aee0b8aa94e100c920d036f1bc5588439a6eda18457ed3ae234','5','admin')"
 
         self.curr.execute(query)
         self.conn.commit()

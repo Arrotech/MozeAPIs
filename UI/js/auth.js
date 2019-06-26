@@ -38,14 +38,6 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                         onSuccess('Signed in successfully!');
                         window.location.replace('admin.html');
                     }
-                    else if (user.email === 'bursar@admin.com'){
-                        localStorage.setItem('user', data.user);
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('admission_no', data.admission_no);
-                        localStorage.setItem('email', data.email);
-                        onSuccess('Signed in successfully!');
-                        window.location.replace('banker.html');
-                    }
                     else {
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('token', data.token);

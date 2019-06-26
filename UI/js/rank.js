@@ -23,11 +23,12 @@ document.getElementById('getRank').addEventListener('click', getRank);
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
-            admission = window.localStorage.getItem('admission_no');
+            let admission_no = document.getElementById('admission_no').value;
             exam_id = window.localStorage.getItem('exam_id');
 
-            fetch('http://localhost:5000/api/v1/exams', {
+            fetch('http://localhost:5000/api/v1/exams/' + admission_no, {
                 method: 'GET',
+                path: admission_no,
                 headers : {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -37,10 +38,10 @@ document.getElementById('getRank').addEventListener('click', getRank);
             .then((res) => res.json())
             .then((data) => {
                 let rank = `<h3 style="margin-left: 10px;"> Exams grouped by Subjects.</h3>`;
-                data.exams.forEach(exam => {
+                ((exam) => {
                     let status = data['status'];
                     let message = data['message'];
-                    const { exam_id, admission_no, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam
+                    const { exam_id, admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam
                     rank += `
                         <div>
                             <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${exam.admission_no}</h4>
@@ -48,6 +49,9 @@ document.getElementById('getRank').addEventListener('click', getRank);
                             <table>
                                 <tr>
                                     <th>Admission No.</th>
+                                    <th>Term</th>
+                                    <th>Form</th>
+                                    <th>Type</th>
                                     <th>Mathematics</th>
                                     <th>English</th>
                                     <th>Kiswahili</th>
@@ -62,6 +66,9 @@ document.getElementById('getRank').addEventListener('click', getRank);
                                 </tr>
                                 <tr>
                                     <td>${exam.admission_no}</td>
+                                    <td>${exam.term}</td>
+                                    <td>${exam.form}</td>
+                                    <td>${exam.type}</td>
                                     <td>${exam.maths}</td>
                                     <td>${exam.english}</td>
                                     <td>${exam.kiswahili}</td>
