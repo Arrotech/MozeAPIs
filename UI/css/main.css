@@ -61,7 +61,7 @@ th{
   /* border-bottom: 1px solid #ddd; */
   background-color: #000000;
   color: white;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 td {
@@ -69,7 +69,7 @@ td {
   vertical-align: bottom;
   padding: 5px;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
   /* border-bottom: 1px solid #ddd; */
 }
 

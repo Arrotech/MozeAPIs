@@ -1,5 +1,3 @@
-document.getElementById('getBooks').addEventListener('click', getBooks);
-
     function callToast() {
 
       var x = document.getElementById("snackbar");
@@ -19,13 +17,15 @@ document.getElementById('getBooks').addEventListener('click', getBooks);
         callToast();
     }
 
-    function getBooks(event){
+    document.getElementById('getBooks').onclick = () => {
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
+            admission = window.localStorage.getItem('admission_no');
 
-            fetch('http://localhost:5000/api/v1/books' ,{
+            fetch('http://localhost:5000/api/v1/books/' + admission ,{
                 method: 'GET',
+                path: admission,
                 headers : {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -34,15 +34,12 @@ document.getElementById('getBooks').addEventListener('click', getBooks);
             })
             .then((res) => res.json())
             .then((data) => {
-                let output = `<h3 style="margin-left: 10px;"> Books grouped by Admission Number.</h3>`;
-                data.books.forEach(book => {
+              data.Book.forEach(book => {
                     let status = data['status'];
                     let message = data['message'];
-                    const { book_id, admission_no, author, title, subject } = book;
+                    const { admission_no, author, title, subject } = book;
                     output += `
                         <div>
-                            <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Registration No: ${book.admission_no}</h4>
-                            <h4 style="margin-left: 10px; text-decoration:none; color: #d65050;">Exam ID: ${book.book_id}</h4>
                             <table>
                                 <tr>
                                     <th>Author</th>

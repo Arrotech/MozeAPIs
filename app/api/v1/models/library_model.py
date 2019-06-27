@@ -43,10 +43,10 @@ class LibraryModel(Database):
         self.curr.close()
         return json.dumps(books, default=str)
 
-    def get_admission_no(self, admission_no):
+    def get_books_by_admission_no(self, admission_no):
         """Get an exam with specific admission no."""
         self.curr.execute(""" SELECT * FROM library WHERE admission_no=%s""", (admission_no,))
-        book = self.curr.fetchone()
+        book = self.curr.fetchall()
         self.conn.commit()
         self.curr.close()
         return json.dumps(book, default=str)

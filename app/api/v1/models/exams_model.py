@@ -68,6 +68,14 @@ class ExamsModel(Database):
         self.curr.close()
         return json.dumps(exams, default=str)
 
+    def get_exams_by_admission_no(self, admission_no):
+        """Fetch an exam by Admission Number."""
+        self.curr.execute(""" SELECT * FROM exams WHERE admission_no='{}'""".format(admission_no))
+        exam = self.curr.fetchall()
+        self.conn.commit()
+        self.curr.close()
+        return json.dumps(exam, default=str)
+
     def get_exam_by_admission_no(self, admission_no):
         """Fetch an exam by Admission Number."""
         self.curr.execute(""" SELECT * FROM exams WHERE admission_no='{}'""".format(admission_no))
