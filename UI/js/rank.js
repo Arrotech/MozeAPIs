@@ -34,9 +34,11 @@ document.getElementById('mybtn').onclick = () => {
         })
         .then((res) => res.json())
         .then((data) => {
+          data.Exam.forEach(exam => {
                 let status = data['status'];
                 let message = data['message'];
-                rank = `
+                const { admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam;
+                rank += `
                     <div>
                         <table>
                             <tr>
@@ -57,21 +59,21 @@ document.getElementById('mybtn').onclick = () => {
                                 <th>Business</th>
                             </tr>
                             <tr>
-                                <td>${data.Exam.admission_no}</td>
-                                <td>${data.Exam.term}</td>
-                                <td>${data.Exam.form}</td>
-                                <td>${data.Exam.type}</td>
-                                <td>${data.Exam.maths}</td>
-                                <td>${data.Exam.english}</td>
-                                <td>${data.Exam.kiswahili}</td>
-                                <td>${data.Exam.chemistry}</td>
-                                <td>${data.Exam.biology}</td>
-                                <td>${data.Exam.physics}</td>
-                                <td>${data.Exam.history}</td>
-                                <td>${data.Exam.geography}</td>
-                                <td>${data.Exam.cre}</td>
-                                <td>${data.Exam.agriculture}</td>
-                                <td>${data.Exam.business}</td>
+                                <td>${exam.admission_no}</td>
+                                <td>${exam.term}</td>
+                                <td>${exam.form}</td>
+                                <td>${exam.type}</td>
+                                <td>${exam.maths}</td>
+                                <td>${exam.english}</td>
+                                <td>${exam.kiswahili}</td>
+                                <td>${exam.chemistry}</td>
+                                <td>${exam.biology}</td>
+                                <td>${exam.physics}</td>
+                                <td>${exam.history}</td>
+                                <td>${exam.geography}</td>
+                                <td>${exam.cre}</td>
+                                <td>${exam.agriculture}</td>
+                                <td>${exam.business}</td>
                             </tr>
                         </table>
                     </div>
@@ -81,6 +83,7 @@ document.getElementById('mybtn').onclick = () => {
                 }else{
                     raiseError(message);
                 }
+                });
                 })
         .catch((err)=>{
             raiseError("Please check your internet connection and try again!");

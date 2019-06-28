@@ -45,7 +45,7 @@ def get_books():
 @jwt_required
 def get_book(admission_no):
     """Fetch a book."""
-    book = LibraryModel().get_admission_no(admission_no)
+    book = LibraryModel().get_books_by_admission_no(admission_no)
     book = json.loads(book)
     if book:
         return make_response(jsonify({

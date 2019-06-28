@@ -84,7 +84,7 @@ def get_exams():
 @jwt_required
 def get_exam(admission_no):
     """Fetch an exam by specific Admission Number."""
-    exam = ExamsModel().get_exam_by_admission_no(admission_no)
+    exam = ExamsModel().get_exams_by_admission_no(admission_no)
     exam = json.loads(exam)
     if exam:
         return make_response(jsonify({
