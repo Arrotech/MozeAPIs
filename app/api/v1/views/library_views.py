@@ -17,13 +17,15 @@ def add_book():
     """Add a new book."""
     details = request.get_json()
     admission_no = details['admission_no']
+    book_no = details['book_no']
     author = details['author']
     title = details['title']
     subject = details['subject']
-    book = LibraryModel().save(admission_no,
-                               author,
-                               title,
-                               subject)
+    book = LibraryModel(admission_no,
+                        book_no,
+                        author,
+                        title,
+                        subject).save()
     book = json.loads(book)
     return make_response(jsonify({
         "status": "201",

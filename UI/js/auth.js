@@ -30,7 +30,7 @@ document.getElementById('postLogin').addEventListener('submit', postLogin);
                 let status = data['status'];
                 let message = data['message'];
                 if (status === '200'){
-                    if (user.email === 'admin@admin.com'){
+                    if (user.role === 'admin'){
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('admission_no', data.user.admission_no);

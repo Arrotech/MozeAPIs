@@ -25,6 +25,7 @@ document.getElementById('postBooks').addEventListener('submit', postBooks);
             token = window.localStorage.getItem('token');
 
             let admission_no = document.getElementById('admission_no').value;
+            let book_no = document.getElementById('book_no').value;
             let author = document.getElementById('author').value;
             let title = document.getElementById('title').value;
             let subject = document.getElementById('subject').value;
@@ -36,7 +37,7 @@ document.getElementById('postBooks').addEventListener('submit', postBooks);
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
-                body:JSON.stringify({admission_no:admission_no, author:author, title:title, subject:subject})
+                body:JSON.stringify({admission_no:admission_no, book_no:book_no, author:author, title:title, subject:subject})
             }).then((res) => res.json())
             .then((data) =>  {
 

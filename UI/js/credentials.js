@@ -17,13 +17,13 @@
         callToast();
     }
 
-    document.getElementById('getBooks').onclick = () => {
+    document.getElementById('getId').onclick = () => {
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
             admission = window.localStorage.getItem('admission_no');
 
-            fetch('http://localhost:5000/api/v1/books/' + admission ,{
+            fetch('http://localhost:5000/api/v1/auth/users/' + admission, {
                 method: 'GET',
                 path: admission,
                 headers : {
@@ -31,40 +31,42 @@
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
-            })
-            .then((res) => res.json())
-            .then((data) => {
-              data.Book.forEach(book => {
+            }).then((res) => res.json())
+            .then((data) =>  {
+              data.Users.forEach(user => {
                     let status = data['status'];
                     let message = data['message'];
-                    const { admission_no, book_no, author, title, subject } = book;
+                    console.log(status);
+                    const { surname, firstname, lastname, admission_no, email, password, form, role  } = user;
                     output += `
+                        <div>
                         <div>
                             <table>
                                 <tr>
-                                    <th>Book No.</th>
-                                    <th>Author</th>
-                                    <th>Title</th>
-                                    <th>Subject</th>
+                                    <th>Admission No.</th>
+                                    <th>Surname</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
                                 </tr>
                                 <tr>
-                                    <td>${book.book_no}</td>
-                                    <td>${book.author}</td>
-                                    <td>${book.title}</td>
-                                    <td>${book.subject}</td>
+                                    <td>${id.admission_no}</td>
+                                    <td>${id.surname}</td>
+                                    <td>${id.firstname}</td>
+                                    <td>${id.lastname}</td>
                                 </tr>
                             </table>
                         </div>
+                        </div>
                     `;
-                    if (status === '200'){
-                        document.getElementById('output').innerHTML = output;
-                    }else{
-                        raiseError(message);
-                    }
-                    });
-                    })
+                if (status === '200'){
+                    widocument.getElementById('output').innerHTML = output;
+                }else{
+                    raiseError(message);
+                }
+                });
+            })
             .catch((err)=>{
                 raiseError("Please check your internet connection and try again!");
                 console.log(err);
             })
-    }
+        }

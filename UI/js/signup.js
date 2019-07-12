@@ -43,13 +43,14 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
             .then((data) =>  {
 
                 console.log(data);
+                let user = data['user'];
                 let status = data['status'];
                 let message = data['message'];
                 if (status === '201'){
                     localStorage.setItem("user", JSON.stringify(data[0]));
                     localStorage.setItem('user', data.user);
-                    localStorage.setItem('admission_no', data.admission_no);
-                    localStorage.setItem('email', data.email);
+                    localStorage.setItem('admission_no', data.user.admission_no);
+                    localStorage.setItem('email', data.user.email);
                     window.location.replace('user.html');
                 }else{
                     raiseError(message);

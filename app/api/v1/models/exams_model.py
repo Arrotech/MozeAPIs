@@ -31,6 +31,7 @@ class ExamsModel(Database):
             business=None):
         """Initialization."""
         super().__init__()
+
         self.admission_no = admission_no
         self.term = term
         self.form = form
