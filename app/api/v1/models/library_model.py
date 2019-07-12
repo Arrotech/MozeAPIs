@@ -11,24 +11,25 @@ class LibraryModel(Database):
     def __init__(
             self,
             admission_no=None,
+            book_no=None,
             author=None,
             title=None,
             subject=None):
         super().__init__()
         self.admission_no = admission_no
+        self.book_no = book_no
         self.author = author
         self.title = title
         self.subject = subject
 
-    def save(self, admission_no, author, title, subject):
+    def save(self):
         """Add a new book."""
 
-        print(admission_no, author, title, subject)
         self.curr.execute(
-            ''' INSERT INTO library(admission_no, author, title, subject)\
-            VALUES('{}','{}','{}','{}')\
-             RETURNING admission_no, author, title, subject''' \
-                .format(admission_no, author, title, subject))
+            ''' INSERT INTO library(admission_no, book_no, author, title, subject)\
+            VALUES('{}','{}','{}','{}','{}')\
+             RETURNING admission_no, book_no, author, title, subject''' \
+                .format(self.admission_no, self.book_no, self.author, self.title, self.subject))
         book = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()

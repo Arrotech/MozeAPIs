@@ -37,12 +37,15 @@ document.getElementById('mybtn').onclick = () => {
           data.Exam.forEach(exam => {
                 let status = data['status'];
                 let message = data['message'];
-                const { admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam;
+                console.log(message);
+                console.log(data);
+                console.log(status);
+                const { admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business, total } = exam;
                 rank += `
                     <div>
                         <table>
                             <tr>
-                                <th>Admission No.</th>
+                                // <th>Admission No.</th>
                                 <th>Term</th>
                                 <th>Form</th>
                                 <th>Type</th>
@@ -57,30 +60,34 @@ document.getElementById('mybtn').onclick = () => {
                                 <th>Cre</th>
                                 <th>Agriculture</th>
                                 <th>Business</th>
+                                <th>Total</th>
                             </tr>
                             <tr>
-                                <td>${exam.admission_no}</td>
-                                <td>${exam.term}</td>
-                                <td>${exam.form}</td>
-                                <td>${exam.type}</td>
-                                <td>${exam.maths}</td>
-                                <td>${exam.english}</td>
-                                <td>${exam.kiswahili}</td>
-                                <td>${exam.chemistry}</td>
-                                <td>${exam.biology}</td>
-                                <td>${exam.physics}</td>
-                                <td>${exam.history}</td>
-                                <td>${exam.geography}</td>
-                                <td>${exam.cre}</td>
-                                <td>${exam.agriculture}</td>
-                                <td>${exam.business}</td>
+                                <td>${data.exam.admission_no}</td>
+                                <td>${data.exam.term}</td>
+                                <td>${data.exam.form}</td>
+                                <td>${data.exam.type}</td>
+                                <td>${data.exam.maths}</td>
+                                <td>${data.exam.english}</td>
+                                <td>${data.exam.kiswahili}</td>
+                                <td>${data.exam.chemistry}</td>
+                                <td>${data.exam.biology}</td>
+                                <td>${data.exam.physics}</td>
+                                <td>${data.exam.history}</td>
+                                <td>${data.exam.geography}</td>
+                                <td>${data.exam.cre}</td>
+                                <td>${data.exam.agriculture}</td>
+                                <td>${data.exam.business}</td>
+                                <td>${data.exam.total}</td>
                             </tr>
                         </table>
                     </div>
                 `;
                 if (status === '200'){
                     document.getElementById('rank').innerHTML = rank;
-                }else{
+                }
+                else{
+                    console.log(message);
                     raiseError(message);
                 }
                 });

@@ -32,6 +32,11 @@ class Database:
                 role varchar NOT NULL
             )""",
             """
+            CREATE TABLE IF NOT EXISTS revoked_tokens(
+                id serial PRIMARY KEY,
+                jti varchar NOT NULL
+            )""",
+            """
             CREATE TABLE IF NOT EXISTS exams(
                 exam_id serial PRIMARY KEY,
                 admission_no varchar NOT NULL,
@@ -65,6 +70,7 @@ class Database:
             CREATE TABLE IF NOT EXISTS library(
                 book_id serial PRIMARY KEY,
                 admission_no varchar NOT NULL,
+                book_no varchar NOT NULL,
                 author varchar NOT NULL,
                 title varchar NOT NULL,
                 subject varchar NOT NULL

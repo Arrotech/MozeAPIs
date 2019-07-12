@@ -381,6 +381,7 @@ new_subject = {
 
 add_book = {
 "admission_no": "NJCF4001",
+"book_no": "KISF1001/19",
 "author": "Ken Walibora",
 "title": "Damu Nyeusi",
 "subject": "kiswahili"
