@@ -37,15 +37,76 @@ document.getElementById('mybtn').onclick = () => {
           data.Exam.forEach(exam => {
                 let status = data['status'];
                 let message = data['message'];
+                let math = Number(exam.maths);
+                let eng = Number(exam.english);
+                let kis = Number(exam.kiswahili);
+                let chem = Number(exam.chemistry);
+                let bio = Number(exam.biology);
+                let phyc = Number(exam.physics);
+                let hist = Number(exam.history);
+                let geo = Number(exam.geography);
+                let c = Number(exam.cre);
+                let agric = Number(exam.agriculture);
+                let bus = Number(exam.business);
                 console.log(message);
-                console.log(data);
-                console.log(status);
-                const { admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business, total } = exam;
+                console.log(exam.maths);
+                const total = math + eng + kis + chem + bio + phyc + hist + geo + c + agric + bus;
+                const average = total/11;
+                if (average >= 80 && average <= 100){
+                  grade = 'A';
+                  points = '12';
+                }
+                else if (average >= 75 && average < 80) {
+                  grade = 'A-';
+                  points = '11';
+                }
+                else if (average >= 70 && average < 75) {
+                  grade = 'B+';
+                  points = '10';
+                }
+                else if (average >= 65 && average < 70) {
+                  grade = 'B';
+                  points = '9';
+                }
+                else if (average >= 60 && average < 65) {
+                  grade = 'B-';
+                  points = '8';
+                }
+                else if (average >= 55 && average < 60) {
+                  grade = 'C+';
+                  points = '7';
+                }
+                else if (average >= 50 && average < 55) {
+                  grade = 'C';
+                  points = '6';
+                }
+                else if (average >= 45 && average < 50) {
+                  grade = 'C-';
+                  points = '5';
+                }
+                else if (average >= 40 && average < 45) {
+                  grade = 'D+';
+                  points = '4';
+                }
+                else if (average >= 35 && average < 40) {
+                  grade = 'D';
+                  points = '3';
+                }
+                else if (average >= 30 && average < 35) {
+                  grade = 'D-';
+                  points = '2';
+                }
+                else if (average >= 0 && average < 30) {
+                  grade = 'E';
+                  points = '1';
+                }
+
+                const { admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business } = exam;
                 rank += `
                     <div>
                         <table>
                             <tr>
-                                // <th>Admission No.</th>
+                                <th>Admission No.</th>
                                 <th>Term</th>
                                 <th>Form</th>
                                 <th>Type</th>
@@ -61,24 +122,30 @@ document.getElementById('mybtn').onclick = () => {
                                 <th>Agriculture</th>
                                 <th>Business</th>
                                 <th>Total</th>
+                                <th>Average</th>
+                                <th>Grade</th>
+                                <th>Points</th>
                             </tr>
                             <tr>
-                                <td>${data.exam.admission_no}</td>
-                                <td>${data.exam.term}</td>
-                                <td>${data.exam.form}</td>
-                                <td>${data.exam.type}</td>
-                                <td>${data.exam.maths}</td>
-                                <td>${data.exam.english}</td>
-                                <td>${data.exam.kiswahili}</td>
-                                <td>${data.exam.chemistry}</td>
-                                <td>${data.exam.biology}</td>
-                                <td>${data.exam.physics}</td>
-                                <td>${data.exam.history}</td>
-                                <td>${data.exam.geography}</td>
-                                <td>${data.exam.cre}</td>
-                                <td>${data.exam.agriculture}</td>
-                                <td>${data.exam.business}</td>
-                                <td>${data.exam.total}</td>
+                                <td>${exam.admission_no}</td>
+                                <td>${exam.term}</td>
+                                <td>${exam.form}</td>
+                                <td>${exam.type}</td>
+                                <td>${exam.maths}</td>
+                                <td>${exam.english}</td>
+                                <td>${exam.kiswahili}</td>
+                                <td>${exam.chemistry}</td>
+                                <td>${exam.biology}</td>
+                                <td>${exam.physics}</td>
+                                <td>${exam.history}</td>
+                                <td>${exam.geography}</td>
+                                <td>${exam.cre}</td>
+                                <td>${exam.agriculture}</td>
+                                <td>${exam.business}</td>
+                                <td>${total}</td>
+                                <td>${average}</td>
+                                <td>${grade}</td>
+                                <td>${points}</td>
                             </tr>
                         </table>
                     </div>
