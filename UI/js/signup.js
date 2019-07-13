@@ -32,7 +32,7 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
             let form = document.getElementById('form').value;
             let role = document.getElementById('role').value;
 
-            fetch('http://localhost:5000/api/v1/auth/register', {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/auth/register', {
                 method: 'POST',
                 headers : {
                     Accept: 'application/json',
