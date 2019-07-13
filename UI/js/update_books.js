@@ -31,7 +31,7 @@ document.getElementById('updateBooks').addEventListener('submit', updateBooks);
             let subject = document.getElementById('subject').value;
 
 
-            fetch('http://localhost:5000/api/v1/books/' + admission_no, {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/books/' + admission_no, {
                 method: 'PUT',
                 path: admission_no,
                 headers : {
