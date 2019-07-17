@@ -2,9 +2,9 @@ document.getElementById('getId').addEventListener('click', getId);
 
     function callToast() {
 
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     function onSuccess(msg){
@@ -24,7 +24,7 @@ document.getElementById('getId').addEventListener('click', getId);
 
             token = window.localStorage.getItem('token');
 
-            fetch('http://localhost:5000/api/v1/id' ,{
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/id' ,{
                 method: 'GET',
                 headers : {
                     Accept: 'application/json',
