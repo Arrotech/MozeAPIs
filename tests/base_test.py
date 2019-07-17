@@ -26,27 +26,36 @@ class BaseTest(unittest.TestCase):
 
     def get_token(self):
         self.client.post('/api/v1/auth/register', data=json.dumps(create_account),
-                         content_type='application/json')
+                            content_type='application/json')
         resp = self.client.post('/api/v1/auth/login', data=json.dumps(user_login),
-                                content_type='application/json')
+                            content_type='application/json')
         access_token = json.loads(resp.get_data(as_text=True))['token']
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
         return auth_header
 
+    def get_refresh_token(self):
+        self.client.post('/api/v1/auth/register', data=json.dumps(create_account),
+                            content_type='application/json')
+        resp = self.client.post('/api/v1/auth/login', data=json.dumps(user_login),
+                            content_type='application/json')
+        refresh_token = json.loads(resp.get_data(as_text=True))['refresh_token']
+        auth_header = {'Authorization': 'Bearer {}'.format(refresh_token)}
+        return auth_header
+
     def get_admin_token(self):
         self.client.post('/api/v1/auth/register', data=json.dumps(admin_account),
-                         content_type='application/json')
+                            content_type='application/json')
         resp = self.client.post('/api/v1/auth/login', data=json.dumps(admin_login),
-                                content_type='application/json')
+                            content_type='application/json')
         access_token = json.loads(resp.get_data(as_text=True))['token']
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
         return auth_header
 
     def get_bursar_token(self):
         self.client.post('/api/v1/auth/register', data=json.dumps(bursar_account),
-                         content_type='application/json')
+                            content_type='application/json')
         resp = self.client.post('/api/v1/auth/login', data=json.dumps(bursar_login),
-                                content_type='application/json')
+                            content_type='application/json')
         access_token = json.loads(resp.get_data(as_text=True))['token']
         auth_header = {'Authorization': 'Bearer {}'.format(access_token)}
         return auth_header

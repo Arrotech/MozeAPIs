@@ -18,6 +18,24 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'], 'Account created successfully!')
         assert response.status_code == 201
 
+    def test_refresh_token(self):
+        """Test the vote json keys."""
+
+        response = self.client.post(
+            '/api/v1/auth/refresh', content_type='application/json',
+            headers=self.get_refresh_token())
+        assert response.status_code == 200
+
+    def test_protected(self):
+        """Test fetching all offices that have been created."""
+
+        response = self.client.post(
+            '/api/v1/auth/register', content_type='application/json',
+            headers=self.get_token())
+        response1 = self.client.get(
+            '/api/v1/auth/protected', content_type='application/json', headers=self.get_token())
+        assert response1.status_code == 200
+
     def test_get_users(self):
         """Test fetching all offices that have been created."""
 
@@ -27,8 +45,7 @@ class TestUsersAccount(BaseTest):
         response1 = self.client.get(
             '/api/v1/auth/users', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'],
-                         "successfully retrieved")
+        self.assertEqual(result['message'], "successfully retrieved")
         assert response1.status_code == 200
 
     def test_get_user_by_admission_no(self):
@@ -40,10 +57,8 @@ class TestUsersAccount(BaseTest):
         response1 = self.client.get(
             '/api/v1/auth/users/NJCF4001', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'],
-                         'successfully retrieved')
+        self.assertEqual(result['message'], 'successfully retrieved')
         assert response1.status_code == 200
-
 
     def test_get_user_not_found(self):
         """Test getting a specific party by id."""
@@ -54,8 +69,7 @@ class TestUsersAccount(BaseTest):
         response1 = self.client.get(
             '/api/v1/auth/users/100', content_type='application/json', headers=self.get_admin_token())
         result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'],
-                         'User Not Found')
+        self.assertEqual(result['message'], 'User Not Found')
         assert response1.status_code == 404
 
     def test_create_account_keys(self):
@@ -75,7 +89,8 @@ class TestUsersAccount(BaseTest):
             '/api/v1/auth/register', data=json.dumps(password_length), content_type='application/json',
             headers=self.get_token())
         result = json.loads(response.data.decode())
-        self.assertEqual(result['message'], 'length of password should be atleast eight characters')
+        self.assertEqual(
+            result['message'], 'length of password should be atleast eight characters')
         assert response.status_code == 400
 
     def test_email_exists(self):

@@ -47,11 +47,22 @@ function postSignup(event){
                 let status = data['status'];
                 let message = data['message'];
                 if (status === '201'){
-                    localStorage.setItem("user", JSON.stringify(data[0]));
-                    localStorage.setItem('user', data.user);
-                    localStorage.setItem('admission_no', data.user.admission_no);
-                    localStorage.setItem('email', data.user.email);
-                    window.location.replace('user.html');
+                    if (user.role === 'admin'){
+                        localStorage.setItem("user", JSON.stringify(data[0]));
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('admission_no', data.user.admission_no);
+                        localStorage.setItem('email', data.user.email);
+                        onSuccess('Account created successfully!');
+                        window.location.replace('admin.html');
+                    }else{
+                        localStorage.setItem("user", JSON.stringify(data[0]));
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('admission_no', data.user.admission_no);
+                        localStorage.setItem('email', data.user.email);
+                        onSuccess('Account created successfully!');
+                        window.location.replace('user.html');
+                    }
+
                 }else{
                     raiseError(message);
                 }
