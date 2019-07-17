@@ -1,8 +1,8 @@
     function callToast() {
 
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     function onSuccess(msg){
@@ -23,7 +23,7 @@
             token = window.localStorage.getItem('token');
             admission = window.localStorage.getItem('admission_no');
 
-            fetch('http://localhost:5000/api/v1/auth/users/' + admission, {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/auth/users/' + admission, {
                 method: 'GET',
                 path: admission,
                 headers : {
@@ -33,7 +33,7 @@
                 },
             }).then((res) => res.json())
             .then((data) =>  {
-              data.Users.forEach(user => {
+                data.Users.forEach(user => {
                     let status = data['status'];
                     let message = data['message'];
                     console.log(status);

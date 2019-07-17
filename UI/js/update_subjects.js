@@ -2,9 +2,9 @@ document.getElementById('updateSubjects').addEventListener('submit', updateSubje
 
     function callToast() {
 
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     function onSuccess(msg){
@@ -39,11 +39,11 @@ document.getElementById('updateSubjects').addEventListener('submit', updateSubje
             let business = document.getElementById('business').value;
 
 
-            fetch('http://localhost:5000/api/v1/subjects/' + admission_no, {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/subjects/' + admission_no, {
                 method: 'PUT',
                 path: admission_no,
                 headers : {
-                	Accept: 'application/json',
+                Accept: 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
