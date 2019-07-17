@@ -3,9 +3,9 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
 
     function callToast() {
 
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     function onSuccess(msg){
@@ -20,7 +20,7 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
         callToast();
     }
 
- function postSignup(event){
+function postSignup(event){
             event.preventDefault();
 
             let firstname = document.getElementById('firstname').value;
@@ -32,7 +32,7 @@ document.getElementById('postSignup').addEventListener('submit', postSignup);
             let form = document.getElementById('form').value;
             let role = document.getElementById('role').value;
 
-            fetch('http://localhost:5000/api/v1/auth/register', {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/auth/register', {
                 method: 'POST',
                 headers : {
                     Accept: 'application/json',
