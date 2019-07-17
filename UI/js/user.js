@@ -25,8 +25,7 @@ document.getElementById('userProfile').addEventListener('click', userProfile);
             token = window.localStorage.getItem('token');
             user_id = window.localStorage.getItem('user_id');
 
-
-            fetch('htthttps://arrotech-school-portal.herokuapp.com/api/v1/users/' + user_id,{
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/users/' + user_id,{
                 method: 'GET',
                 path: user_id,
                 headers : {
