@@ -6,6 +6,7 @@ from app.api.v1.models.revoked_tokens_model import RevokedToken
 from utils.authorization import admin_required
 from utils.utils import is_valid_email, raise_error, check_register_keys, form_restrictions
 import datetime
+from werkzeug.security import check_password_hash
 
 auth_v1 = Blueprint('auth_v1', __name__)
 
@@ -59,17 +60,24 @@ def login():
     email = details['email']
     password = details['password']
     user = json.loads(UsersModel().get_email(email))
+    print(user)
     if user:
-        expires = datetime.timedelta(days=365)
-        token = create_access_token(identity=email, expires_delta=expires)
-        refresh_token = create_refresh_token(identity=email, expires_delta=expires)
+        password_db = user['password']
+        if check_password_hash(password_db, password):
+            expires = datetime.timedelta(days=365)
+            token = create_access_token(identity=email, expires_delta=expires)
+            refresh_token = create_refresh_token(identity=email, expires_delta=expires)
+            return make_response(jsonify({
+                "status": "200",
+                "message": "Successfully logged in!",
+                "token": token,
+                "refresh_token": refresh_token,
+                "user": user
+            }), 200)
         return make_response(jsonify({
-            "status": "200",
-            "message": "Successfully logged in!",
-            "token": token,
-            "refresh_token": refresh_token,
-            "user": user
-        }), 200)
+            "status": "401",
+            "message": "Invalid Email or Password"
+        }), 401)
     return make_response(jsonify({
         "status": "401",
         "message": "Invalid Email or Password"
