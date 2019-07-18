@@ -40,7 +40,7 @@ class TestUsersAccount(BaseTest):
         """Test fetching all offices that have been created."""
 
         response = self.client.post(
-            '/api/v1/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
             '/api/v1/auth/users', content_type='application/json', headers=self.get_admin_token())
@@ -52,7 +52,7 @@ class TestUsersAccount(BaseTest):
         """Test getting a specific party by id."""
 
         response = self.client.post(
-            '/api/v1/auth/register', data=json.dumps(admin_account_test), content_type='application/json',
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
             headers=self.get_token())
         response1 = self.client.get(
             '/api/v1/auth/users/NJCF4001', content_type='application/json', headers=self.get_admin_token())
