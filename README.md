@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Arrotech/Portal.svg?branch=develop)](https://travis-ci.org/Arrotech/Portal) [![Coverage Status](https://coveralls.io/repos/github/Arrotech/Portal/badge.svg?branch=develop)](https://coveralls.io/github/Arrotech/Portal?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/d18f71e29c6588ba2043/maintainability)](https://codeclimate.com/github/Arrotech/Portal/maintainability) [![codecov](https://codecov.io/gh/Arrotech/Portal/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/Arrotech/Portal) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/) [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Build Status](https://travis-ci.org/Arrotech/Portal.svg?branch=develop)](https://travis-ci.org/Arrotech/Portal) [![Maintainability](https://api.codeclimate.com/v1/badges/d18f71e29c6588ba2043/maintainability)](https://codeclimate.com/github/Arrotech/Portal/maintainability) [![codecov](https://codecov.io/gh/Arrotech/Portal/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/Arrotech/Portal) [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/) [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 
 **SCHOOL PORTAL**
@@ -13,22 +13,22 @@ Below are the Endpoints that have been created.
 | /api/v1/auth/login | Login to account |GET|
 | /api/v1/exams |  Add Exams | POST |
 | /api/v1/exams | Fetch all Exams | GET |
-| /api/v1/exams/<string:admission_no> | Fetch one Exam | GET |
-| /api/v1/exams/<string:admission_no> | Edit an Exam | PUT |
-| /api/v1/exams/<string:admission_no> | Delete an Exam | DELETE |
-| /api/v1/users/<string:admission_no> | Fetch a specific user | GET |
+| /api/v1/exams/admission_no | Fetch one Exam | GET |
+| /api/v1/exams/admission_no | Edit an Exam | PUT |
+| /api/v1/exams/admission_no | Delete an Exam | DELETE |
+| /api/v1/users/admission_no | Fetch a specific user | GET |
 | /api/v1/fees |  Add Fees | POST |
 | /api/v1/fees | Fetch all Fees | GET |
-| /api/v1/fees/<string:admission_no> | Fetch Specific Fee | GET |
+| /api/v1/fees/admission_no | Fetch Specific Fee | GET |
 | /api/v1/books |  Add Books | POST |
 | /api/v1/books | Fetch all Books | GET |
-| /api/v1/books/<string:admission_no> | Fetch Specific Book | GET |
+| /api/v1/books/admission_no | Fetch Specific Book | GET |
 | /api/v1/id |  Add Student Information | POST |
 | /api/v1/id | Fetch Students Information | GET |
-| /api/v1/id/<string:admission_no> | Fetch Specific Student Information | GET |
+| /api/v1/id/admission_no | Fetch Specific Student Information | GET |
 | /api/v1/subjects |  Register Subjects | POST |
 | /api/v1/subjects | Fetch all Subjects | GET |
-| /api/v1/subjects/<string:admission_no> | Fetch Specific Subject | GET |
+| /api/v1/subjects/admission_no | Fetch Specific Subject | GET |
 
 
 **TOOLS TO BE USED IN THE DEVELOPMENT**
