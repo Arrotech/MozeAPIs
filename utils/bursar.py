@@ -6,7 +6,7 @@ from flask_jwt_extended import get_jwt_identity
 from app.api.v1.models.users_model import UsersModel
 
 
-def admin_required(func):
+def bursar_required(func):
     """ Admin Rights."""
 
     @wraps(func)
@@ -17,9 +17,9 @@ def admin_required(func):
             cur_user = [
                 user for user in users if user['email'] == get_jwt_identity()]
             user_role = cur_user[0]['role']
-            if user_role != 'admin':
+            if user_role != 'bursar':
                 return {
-                        'message': 'This activity can be completed by Admin only'}, 403  # Forbidden
+                        'message': 'This activity can be completed by bursar only'}, 403  # Forbidden
             return func(*args, **kwargs)
         except Exception as e:
             return {"message": e}

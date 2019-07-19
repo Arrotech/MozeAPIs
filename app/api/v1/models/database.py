@@ -66,6 +66,16 @@ class Database:
                 comment varchar NOT NULL
             )""",
             """
+            CREATE TABLE IF NOT EXISTS fees(
+                fee_id serial PRIMARY KEY,
+                admission_no varchar NOT NULL,
+                transaction_type varchar NOT NULL,
+                transaction_no varchar NOT NULL,
+                description varchar NOT NULL,
+                amount numeric NOT NULL
+            )
+            """,
+            """
             CREATE TABLE IF NOT EXISTS library(
                 book_id serial PRIMARY KEY,
                 admission_no varchar NOT NULL,
