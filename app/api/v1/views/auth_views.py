@@ -11,7 +11,7 @@ from werkzeug.security import check_password_hash
 auth_v1 = Blueprint('auth_v1', __name__)
 
 
-@auth_v1.route('/register', methods=['POST'])
+@auth_v1.route('/register', methods=['POST', 'GET'])
 def signup():
     """A new user can create a new account."""
     errors = check_register_keys(request)
