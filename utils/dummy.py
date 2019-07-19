@@ -27,6 +27,11 @@ new_account = {
     "role": "student"
 }
 
+wrong_password_login = {
+    "email": "gitundu.kevin@students.jcs.ac.ke",
+    "password": "Mercy20930988"
+}
+
 wrong_account_keys = {
     "firname": "Kevin",
     "lastname": "Njoroge",
@@ -233,6 +238,24 @@ new_entry = {
 "business": "88"
 }
 
+edit_exams = {
+"admission_no": "NJCF4001",
+"term": "1st",
+"form": "4",
+"type": "main",
+"maths": "88",
+"english": "87",
+"kiswahili": "90",
+"chemistry": "78",
+"biology": "86",
+"physics": "74",
+"history": "89",
+"geography": "81",
+"cre": "94",
+"agriculture": "85",
+"business": "88"
+}
+
 term_restrictions = {
 "admission_no": "NJCF4001",
 "term": "first",
@@ -254,7 +277,7 @@ term_restrictions = {
 form_restrictions = {
 "admission_no": "NJCF4001",
 "term": "1st",
-"form": "4",
+"form": "5",
 "type": "main",
 "maths": "87",
 "english": "87",
@@ -273,7 +296,7 @@ type_restrictions = {
 "admission_no": "NJCF4001",
 "term": "1st",
 "form": "4",
-"type": "main",
+"type": "test",
 "maths": "87",
 "english": "87",
 "kiswahili": "90",

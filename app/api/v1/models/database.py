@@ -12,8 +12,7 @@ class Database:
         self.db_host = os.getenv('DB_HOST')
         self.db_user = os.getenv('DB_USER')
         self.db_password = os.getenv('DB_PASSWORD')
-        self.conn = psycopg2.connect(database=self.db_name, host=self.db_host, user=self.db_user,
-                                     password=self.db_password)
+        self.conn = psycopg2.connect(database=self.db_name, host=self.db_host, user=self.db_user, password=self.db_password)
         self.curr = self.conn.cursor(cursor_factory=RealDictCursor)
 
     def create_table(self):
@@ -112,7 +111,7 @@ class Database:
 
     def create_admin(self):
         """Create a deafult admin user."""
-        query = "INSERT INTO users(firstname,lastname,surname,admission_no,email,password,form,role)\
+        query = "INSERT INTO users(firstname,lastname,surname,admission_no,email, password,form,role)\
         VALUES('Harun','Gachanja','Gitundu','NA','admin@admin.com','pbkdf2:sha256:50000$aNlgJU9E$bf5d2dc9783e38f905618aacd50eb55b098f282dc6b03834aee7c4f80a9100e8','5','admin')"
 
         self.curr.execute(query)
@@ -141,4 +140,4 @@ if __name__ == '__main__':
     Database().destroy_table()
     Database().create_table()
     Database().create_admin()
-    Database().create_bursar()
+

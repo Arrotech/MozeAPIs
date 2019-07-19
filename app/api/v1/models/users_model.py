@@ -6,8 +6,7 @@ from app.api.v1.models.database import Database
 class UsersModel(Database):
     """Add a new user and retrieve User(s) by Id, Admission Number or Email."""
 
-    def __init__(self, firstname=None, lastname=None, surname=None, admission_no=None, email=None, password=None,
-                 form=None, role='student'):
+    def __init__(self, firstname=None, lastname=None, surname=None, admission_no=None, email=None, password=None, form=None, role='student'):
         super().__init__()
         self.firstname = firstname
         self.lastname = lastname
@@ -23,7 +22,7 @@ class UsersModel(Database):
         """Save information of the new user."""
         self.curr.execute(
             ''' INSERT INTO users(firstname, lastname, surname, admission_no, email, password, form, role)\
-             VALUES('{}','{}','{}','{}','{}','{}','{}','{}') RETURNING firstname, lastname, surname, admission_no, email, password, form, role''' \
+                VALUES('{}','{}','{}','{}','{}','{}','{}','{}') RETURNING firstname, lastname, surname, admission_no, email, password, form, role''' \
                 .format(self.firstname, self.lastname, self.surname, self.admission_no, self.email, self.password,
                         self.form, self.role))
         user = self.curr.fetchone()
