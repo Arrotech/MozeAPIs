@@ -54,7 +54,15 @@ function postSignup(event){
                         localStorage.setItem('email', data.user.email);
                         onSuccess('Account created successfully!');
                         window.location.replace('admin.html');
-                    }else{
+                    }else if(user.role === 'bursar'){
+                        localStorage.setItem("user", JSON.stringify(data[0]));
+                        localStorage.setItem('user', data.user);
+                        localStorage.setItem('admission_no', data.user.admission_no);
+                        localStorage.setItem('email', data.user.email);
+                        onSuccess('Account created successfully!');
+                        window.location.replace('bursar.html');
+                    }
+                    else{
                         localStorage.setItem("user", JSON.stringify(data[0]));
                         localStorage.setItem('user', data.user);
                         localStorage.setItem('admission_no', data.user.admission_no);
