@@ -1,5 +1,6 @@
 """Json package."""
 import json
+import datetime
 
 from flask import make_response, jsonify, request, Blueprint
 from flask_jwt_extended import jwt_required
@@ -36,6 +37,10 @@ def add_exam():
     cre = details['cre']
     agriculture = details['agriculture']
     business = details['business']
+    if ((details['maths'] < 0) or (details['english'] < 0) or (details['kiswahili'] < 0) or (details['chemistry'] < 0) or (details['biology'] < 0) or (details['physics'] < 0) or (details['history'] < 0) or (details['geography'] < 0) or (details['cre'] < 0) or (details['agriculture'] < 0) or (details['business'] < 0)):
+        return raise_error(400, "Please add a number greater than 0")
+    if ((details['maths'] > 100) or (details['english'] > 100) or (details['kiswahili'] > 100) or (details['chemistry'] > 100) or (details['biology'] > 100) or (details['physics'] > 100) or (details['history'] > 100) or (details['geography'] > 100) or (details['cre'] > 100) or (details['agriculture'] > 100) or (details['business'] > 100)):
+        return raise_error(400, "Please add a number less than 100")
     if (form_restrictions(form) is False):
         return raise_error(400, "Form should be 1, 2, 3 or 4")
     if (term_restrictions(term) is False):
@@ -45,20 +50,20 @@ def add_exam():
     user = json.loads(UsersModel().get_admission_no(admission_no))
     if user:
         exam = ExamsModel(admission_no,
-                          term,
-                          form,
-                          type,
-                          maths,
-                          english,
-                          kiswahili,
-                          chemistry,
-                          biology,
-                          physics,
-                          history,
-                          geography,
-                          cre,
-                          agriculture,
-                          business).save()
+                            term,
+                            form,
+                            type,
+                            maths,
+                            english,
+                            kiswahili,
+                            chemistry,
+                            biology,
+                            physics,
+                            history,
+                            geography,
+                            cre,
+                            agriculture,
+                            business).save()
         exam = json.loads(exam)
         return make_response(jsonify({
             "status": "201",
@@ -128,20 +133,20 @@ def put(admission_no):
     if (type_restrictions(type) is False):
         return raise_error(400, "Type should be either MAIN, main, CAT, or cat")
     exam = ExamsModel(admission_no,
-                      term,
-                      form,
-                      type,
-                      maths,
-                      english,
-                      kiswahili,
-                      chemistry,
-                      biology,
-                      physics,
-                      history,
-                      geography,
-                      cre,
-                      agriculture,
-                      business).update_scores()
+                        term,
+                        form,
+                        type,
+                        maths,
+                        english,
+                        kiswahili,
+                        chemistry,
+                        biology,
+                        physics,
+                        history,
+                        geography,
+                        cre,
+                        agriculture,
+                        business).update_scores()
     exam = json.loads(exam)
     if exam:
         return make_response(jsonify({

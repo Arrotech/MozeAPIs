@@ -57,8 +57,8 @@ def term_restrictions(data):
 def type_restrictions(data):
     """Restrict user inputs in a list."""
 
-    type = ["main", "MAIN", "CAT", "cat"]
-    if data not in type:
+    exam_type = ["main", "MAIN", "CAT", "cat"]
+    if data not in exam_type:
         return False
     return True
 

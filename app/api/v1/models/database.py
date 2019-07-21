@@ -122,7 +122,16 @@ class Database:
     def create_admin(self):
         """Create a deafult admin user."""
         query = "INSERT INTO users(firstname,lastname,surname,admission_no,email, password,form,role)\
-        VALUES('Harun','Gachanja','Gitundu','NA','admin@admin.com','pbkdf2:sha256:50000$aNlgJU9E$bf5d2dc9783e38f905618aacd50eb55b098f282dc6b03834aee7c4f80a9100e8','5','admin')"
+        VALUES('Harun','Gachanja','Gitundu','ADMF1001','harun@admin.com','pbkdf2:sha256:50000$aNlgJU9E$bf5d2dc9783e38f905618aacd50eb55b098f282dc6b03834aee7c4f80a9100e8','1','admin')"
+
+        self.curr.execute(query)
+        self.conn.commit()
+        self.curr.close()
+
+    def create_bursar(self):
+        """Create a deafult admin user."""
+        query = "INSERT INTO users(firstname,lastname,surname,admission_no,email, password,form,role)\
+        VALUES('Samuel','Njoroge','Gitundu','ADMF2001','samuel@admin.com','pbkdf2:sha256:50000$MrtmQD9F$02db7419b111987ece6fae387f432bf875b4a34a4161c8e9ebf99f02c56258eb','2','admin')"
 
         self.curr.execute(query)
         self.conn.commit()
@@ -150,4 +159,5 @@ if __name__ == '__main__':
     Database().destroy_table()
     Database().create_table()
     Database().create_admin()
+    Database().create_bursar()
 

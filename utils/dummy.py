@@ -225,17 +225,17 @@ new_entry = {
 "term": "1st",
 "form": "4",
 "type": "main",
-"maths": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 edit_exams = {
@@ -243,17 +243,17 @@ edit_exams = {
 "term": "1st",
 "form": "4",
 "type": "main",
-"maths": "88",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "74",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 term_restrictions = {
@@ -261,17 +261,17 @@ term_restrictions = {
 "term": "first",
 "form": "4",
 "type": "main",
-"maths": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 form_restrictions = {
@@ -279,17 +279,17 @@ form_restrictions = {
 "term": "1st",
 "form": "5",
 "type": "main",
-"maths": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 type_restrictions = {
@@ -297,17 +297,17 @@ type_restrictions = {
 "term": "1st",
 "form": "4",
 "type": "test",
-"maths": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 wrong_exam_keys = {
@@ -315,17 +315,17 @@ wrong_exam_keys = {
 "term": "1st",
 "form": "4",
 "type": "main",
-"mhs": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"mhs": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 entry = {
@@ -333,53 +333,53 @@ entry = {
 "term": "1st",
 "form": "4",
 "type": "main",
-"maths": "98",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
-Invalid_exam_key = {
-"admiion_no": "NJCS001",
+greater_than = {
+"admission_no": "NJCF4001",
 "term": "1st",
 "form": "4",
 "type": "main",
-"math": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": 870,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
-Invalid_exam_key_put = {
-"admissioo": "NJCS001",
+less_than = {
+"admission_no": "NJCF4001",
 "term": "1st",
 "form": "4",
 "type": "main",
-"maths": "87",
-"english": "87",
-"kiswahili": "90",
-"chemistry": "78",
-"biology": "86",
-"physics": "76",
-"history": "89",
-"geography": "81",
-"cre": "94",
-"agriculture": "85",
-"business": "88"
+"maths": -87,
+"english": 87,
+"kiswahili": 90,
+"chemistry": 78,
+"biology": 86,
+"physics": 76,
+"history": 89,
+"geography": 81,
+"cre": 94,
+"agriculture": 85,
+"business": 88
 }
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Subjects Data @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

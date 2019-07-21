@@ -6,8 +6,6 @@ from flask_restful import Resource
 from app.api.v1.models.fees_models import FeesModels
 from app.api.v1.models.users_model import UsersModel
 from utils.bursar import bursar_required
-
-"""from utils.utils import raise_error, check_order_keys"""
 from flask_jwt_extended import jwt_required
 
 fees_v1 = Blueprint('fees_v1', __name__)
