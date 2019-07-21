@@ -1,6 +1,6 @@
 import json
 
-from utils.dummy import entry, new_entry, edit_exams, Invalid_exam_key, Invalid_exam_key_put, new_account, wrong_exam_keys, admin_account_test, term_restrictions, form_restrictions, type_restrictions
+from utils.dummy import greater_than, less_than, entry, new_entry, edit_exams, new_account, wrong_exam_keys, admin_account_test, term_restrictions, form_restrictions, type_restrictions
 from .base_test import BaseTest
 
 
@@ -17,6 +17,30 @@ class TestExams(BaseTest):
         result = json.loads(response.data.decode())
         self.assertEqual(result['message'], 'Entry created successfully!')
         assert response.status_code == 201
+
+    def test_marks_less_than_0(self):
+        """Test that the add exams endpoint works."""
+        response1 = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+            headers=self.get_token())
+        response = self.client.post(
+            '/api/v1/exams', data=json.dumps(less_than), content_type='application/json',
+            headers=self.get_admin_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'Please add a number greater than 0')
+        assert response.status_code == 400
+
+    def test_marks_greater_than_100(self):
+        """Test that the add exams endpoint works."""
+        response1 = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+            headers=self.get_token())
+        response = self.client.post(
+            '/api/v1/exams', data=json.dumps(greater_than), content_type='application/json',
+            headers=self.get_admin_token())
+        result = json.loads(response.data.decode())
+        self.assertEqual(result['message'], 'Please add a number less than 100')
+        assert response.status_code == 400
 
     def test_edit_exam_keys(self):
         """Test the vote json keys."""
@@ -141,13 +165,16 @@ class TestExams(BaseTest):
         """Test fetching all exams that have been created."""
 
         response = self.client.post(
+            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
+            headers=self.get_token())
+        response1 = self.client.post(
             '/api/v1/exams', data=json.dumps(new_entry), content_type='application/json',
             headers=self.get_admin_token())
-        response1 = self.client.get(
+        response2 = self.client.get(
             '/api/v1/exams', content_type='application/json', headers=self.get_token())
-        result = json.loads(response1.data.decode())
+        result = json.loads(response2.data.decode())
         self.assertEqual(result['message'], "successfully retrieved")
-        assert response1.status_code == 200
+        assert response2.status_code == 200
 
     def test_get_exam_by_admission_no(self):
         """Test getting a specific party by id."""

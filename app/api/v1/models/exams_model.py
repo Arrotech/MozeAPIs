@@ -52,8 +52,8 @@ class ExamsModel(Database):
         """Save new exam entry to the exams database."""
         self.curr.execute(
             ''' INSERT INTO exams(admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business)\
-            VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')\
-             RETURNING admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
+            VALUES('{}','{}','{}','{}',{},{},{},{},{},{},{},{},{},{},{})\
+            RETURNING admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business''' \
                 .format(self.admission_no, self.term, self.form, self.type, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics, self.history, self.geography, self.cre,
                         self.agriculture, self.business))
         exam = self.curr.fetchone()
@@ -88,10 +88,10 @@ class ExamsModel(Database):
     def update_scores(self, admission_no):
         """Update an exam by Admission Number."""
         self.curr.execute("""UPDATE exams\
-            SET admission_no='{}', term='{}', form='{}', type='{}', maths='{}', english='{}', kiswahili='{}', chemistry='{}', biology='{}', physics='{}', history='{}', geography='{}', cre='{}', agriculture='{}', business='{}'\
+            SET admission_no='{}', term='{}', form='{}', type='{}', maths={}, english={}, kiswahili={}, chemistry={}, biology={}, physics={}, history={}, geography={}, cre={}, agriculture={}, business={}\
             WHERE admission_no='{}' RETURNING admission_no, term, form, type, maths, english, kiswahili, chemistry, biology, physics, history, geography, cre, agriculture, business""" \
-                          .format(self.admission_no, self.term, self.form, self.type, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
-                                  self.history, self.geography, self.cre, self.agriculture, self.business))
+            .format(self.admission_no, self.term, self.form, self.type, self.maths, self.english, self.kiswahili, self.chemistry, self.biology, self.physics,
+            self.history, self.geography, self.cre, self.agriculture, self.business))
         exam = self.curr.fetchone()
         self.conn.commit()
         self.curr.close()

@@ -45,7 +45,7 @@ class FeesModels(Database):
     def get_admission_no(self, admission_no):
         """Get an exam with specific admission no."""
         self.curr.execute(""" SELECT * FROM fees WHERE admission_no=%s""", (admission_no,))
-        fees = self.curr.fetchone()
+        fees = self.curr.fetchall()
         self.conn.commit()
         self.curr.close()
         return json.dumps(fees, default=str)
