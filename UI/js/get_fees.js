@@ -34,10 +34,10 @@ document.getElementById('getFees').onclick = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            data.fee.forEach(fees => {
+            data.Fee.forEach(fee => {
                 let status = data['status'];
                 let message = data['message'];
-                const { admission_no, transaction_type, transaction_no, description, amount } = fees;
+                const { admission_no, transaction_type, transaction_no, description, amount } = fee;
                 output += `
                     <div>
                         <table>
@@ -48,10 +48,10 @@ document.getElementById('getFees').onclick = () => {
                                 <th>Amount</th>
                             </tr>
                             <tr>
-                                <td>${fees.transaction_type}</td>
-                                <td>${fees.transaction_no}</td>
-                                <td>${fees.description}</td>
-                                <td>${fees.amount}</td>
+                                <td>${fee.transaction_type}</td>
+                                <td>${fee.transaction_no}</td>
+                                <td>${fee.description}</td>
+                                <td>${fee.amount}</td>
                             </tr>
                         </table>
                     </div>

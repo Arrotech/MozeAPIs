@@ -61,7 +61,7 @@ def get_fee(admission_no):
         return make_response(jsonify({
             "status": "200",
             "message": "successfully retrieved",
-            "Exam": fee
+            "Fee": fee
         }), 200)
     return make_response(jsonify({
         "status": "404",
