@@ -23,9 +23,12 @@ document.getElementById('updateExams').addEventListener('submit', updateExams);
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
+            admission = window.localStorage.getItem('admission_no');
 
-            let exam_id = document.getElementById('exam_id').value;
             let admission_no = document.getElementById('admission_no').value;
+            let term = document.getElementById('term').value;
+            let form = document.getElementById('form').value;
+            let type = document.getElementById('type').value;
             let maths = document.getElementById('maths').value;
             let english = document.getElementById('english').value;
             let kiswahili = document.getElementById('kiswahili').value;
@@ -39,15 +42,15 @@ document.getElementById('updateExams').addEventListener('submit', updateExams);
             let business = document.getElementById('business').value;
 
 
-            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/exams/' + exam_id, {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/exams/' + admission, {
                 method: 'PUT',
-                path: exam_id,
+                path: admission,
                 headers : {
                 Accept: 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
-                body:JSON.stringify({exam_id:exam_id, admission_no:admission_no, maths:maths, english:english, kiswahili:kiswahili, chemistry:chemistry, biology:biology, physics:physics, history:history, geography:geography, cre:cre, agriculture:agriculture, business:business})
+                body:JSON.stringify({admission_no:admission_no, term:term, form:form, type:type, maths:maths, english:english, kiswahili:kiswahili, chemistry:chemistry, biology:biology, physics:physics, history:history, geography:geography, cre:cre, agriculture:agriculture, business:business})
             }).then((res) => res.json())
             .then((data) =>  {
 
