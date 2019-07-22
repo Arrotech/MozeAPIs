@@ -23,7 +23,6 @@ document.getElementById('updateExams').addEventListener('submit', updateExams);
             event.preventDefault();
 
             token = window.localStorage.getItem('token');
-            admission = window.localStorage.getItem('admission_no');
 
             let admission_no = document.getElementById('admission_no').value;
             let term = document.getElementById('term').value;
@@ -42,9 +41,9 @@ document.getElementById('updateExams').addEventListener('submit', updateExams);
             let business = document.getElementById('business').value;
 
 
-            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/exams/' + admission, {
+            fetch('https://arrotech-school-portal.herokuapp.com/api/v1/exams/' + admission_no, {
                 method: 'PUT',
-                path: admission,
+                path: admission_no,
                 headers : {
                 Accept: 'application/json',
                     'Content-Type': 'application/json',
