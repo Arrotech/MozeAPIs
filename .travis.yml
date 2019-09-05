@@ -12,6 +12,12 @@ install:
   - pip install coverage
   - pip install coveralls
 
+services:
+    - postgresql
+
+addons:
+    postgresql: '9.6'
+
 before_script:
   - export FLASK_APP='run.py'
   - psql -c 'create database test_portal;' -U postgres
@@ -20,6 +26,7 @@ before_script:
 
 script:
   - nosetests --with-coverage --cover-package=app
+  - pytest --cov=app --cov-report=term-missing
 
 after_success:
   - coveralls
