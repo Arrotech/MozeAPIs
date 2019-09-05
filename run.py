@@ -1,11 +1,11 @@
 import os
 
-from app import moze_app
+from app import auth_app
 from flask_jwt_extended import JWTManager
 from app.api.v1.models.database import Database
 
 config_name = os.getenv('APP_SETTINGS')
-app = moze_app(config_name)
+app = auth_app(config_name)
 
 
 @app.cli.command()
