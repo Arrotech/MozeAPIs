@@ -33,22 +33,12 @@ class Database:
             """
             CREATE TABLE IF NOT EXISTS add_services(
                 service_id serial UNIQUE,
-                service_provider integer NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
                 portfolio varchar NOT NULL,
                 occupation varchar NOT NULL,
                 phone varchar NOT NULL,
                 location varchar NOT NULL,
                 img varchar NOT NULL,
-                cost varchar NOT NULL,
-                PRIMARY KEY (service_provider)
-            )""",
-            """
-            CREATE TABLE IF NOT EXISTS seek_services(
-                services_id serial NOT NULL,
-                service_seeker integer NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
-                service integer NOT NULL REFERENCES add_services (service_id) ON DELETE CASCADE,
-                cost varchar NOT NULL,
-                PRIMARY KEY (service_seeker, service)
+                cost varchar NOT NULL
             )"""
         ]
         try:
@@ -71,8 +61,7 @@ class Database:
         """Destroy tables"""
         users = "DROP TABLE IF EXISTS  users CASCADE"
         add_services = "DROP TABLE IF EXISTS  add_services CASCADE"
-        seek_services = "DROP TABLE IF EXISTS  seek_services CASCADE"
-        queries = [users, add_services, seek_services]
+        queries = [users, add_services]
         try:
             for query in queries:
                 self.curr.execute(query)
@@ -80,8 +69,3 @@ class Database:
             self.curr.close()
         except Exception as e:
             return e
-
-
-if __name__ == '__main__':
-    Database().destroy_table()
-    Database().create_table()

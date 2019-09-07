@@ -121,17 +121,6 @@ wrong_email_login = {
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ NEW SERVICE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 add_service = {
-    "service_provider": "1",
-    "portfolio": "Technical",
-    "occupation": "carpenter",
-    "phone": "0711371265",
-    "location": "nakuru",
-    "img": "https://picture.png",
-    "cost": "2500"
-}
-
-wrong_service_provider_input = {
-    "service_provider": "fyiv",
     "portfolio": "Technical",
     "occupation": "carpenter",
     "phone": "0711371265",
@@ -141,7 +130,6 @@ wrong_service_provider_input = {
 }
 
 wrong_add_services_keys = {
-    "service_provider": "1",
     "poolio": "Technical",
     "occupation": "carpenter",
     "phone": "0711371265",
@@ -150,35 +138,11 @@ wrong_add_services_keys = {
     "cost": "2500"
 }
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ SEEK SERVICE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-seek_service = {
-    "service_seeker": "1",
-    "service": "1",
-    "cost": "2500"
-}
-
-wrong_seek_services_keys = {
-    "servi_seeker": "1",
-    "service": "1",
-    "cost": "2500"
-}
-
-wrong_service_seeker_input = {
-    "service_seeker": "duyzt",
-    "service": "1",
-    "cost": "2500"
-}
-
-wrong_service_input = {
-    "service_seeker": "1",
-    "service": "gcxkty",
-    "cost": "2500"
-}
-
-wrong_service_seeker_value = {
-    "service_seeker": "3",
-    "service": "3",
+wrong_phone = {
+    "portfolio": "Technical",
+    "occupation": "carpenter",
+    "phone": "0711371278hvh11265",
+    "location": "nakuru",
+    "img": "https://picture.png",
     "cost": "2500"
 }

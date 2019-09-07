@@ -162,6 +162,15 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'], 'Invalid Email or Password')
         assert response1.status_code == 401
 
+    def test_login_with_wrong_password(self):
+        """Test login with wrong email."""
+        response1 = self.client.post(
+            '/api/v1/auth/login', data=json.dumps(wrong_password_login), content_type='application/json',
+            headers=self.get_token())
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'], 'Invalid Email or Password')
+        assert response1.status_code == 401
+
     def test_refresh_token(self):
         """Test refresh token endpoint."""
         response = self.client.post(

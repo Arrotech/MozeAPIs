@@ -30,7 +30,7 @@ def check_login_keys(request):
 
 
 def check_add_services_keys(request):
-    res_keys = ['service_provider', 'portfolio',
+    res_keys = ['portfolio',
                 'occupation', 'phone', 'location', 'img', 'cost']
     errors = []
     for key in res_keys:
