@@ -25,7 +25,6 @@ before_script:
   - flask create
 
 script:
-  - nosetests --with-coverage --cover-package=app
   - pytest --cov=app --cov-report=term-missing
 
 after_success:
