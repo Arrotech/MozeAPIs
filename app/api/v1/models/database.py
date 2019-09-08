@@ -69,3 +69,7 @@ class Database:
             self.curr.close()
         except Exception as e:
             return e
+
+if __name__ == '__main__':
+    Database().drop_table()
+    Database().create_table()
