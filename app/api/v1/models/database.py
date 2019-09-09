@@ -71,5 +71,5 @@ class Database:
             return e
 
 if __name__ == '__main__':
-    Database().drop_table()
+    Database().destroy_table()
     Database().create_table()
