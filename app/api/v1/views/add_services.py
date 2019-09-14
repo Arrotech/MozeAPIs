@@ -35,10 +35,11 @@ def add_service():
 @add_services_v1.route('/add_services', methods=['GET'])
 def get_all_services():
     '''Fetch all the existing services.'''
+    services = AddServicesModel().get_services()
     return make_response(jsonify({
         "status": "200",
         "message": "success",
-        "hotels": json.loads(AddServicesModel().get_services())
+        "services": services
     }), 200)
 
 
@@ -46,13 +47,13 @@ def get_all_services():
 def get_specific_service(occupation):
     """Fetch a specific service."""
     service = AddServicesModel().get_service(occupation)
-    service = json.loads(service)
     if service:
         return make_response(jsonify({
             "status": "200",
             "message": "success",
             "service": service
         }), 200)
+
     return make_response(jsonify({
         "status": "404",
         "message": "service not found"

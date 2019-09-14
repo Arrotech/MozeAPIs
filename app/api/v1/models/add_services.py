@@ -32,7 +32,7 @@ class AddServicesModel(Database):
         """Fetch all services."""
         query = "SELECT * from add_services"
         services = Database().fetch(query)
-        return json.dumps(services, default=str)
+        return services
 
     def get_service(self, occupation):
         """Get a service with specific occupation."""
@@ -41,4 +41,4 @@ class AddServicesModel(Database):
         service = self.curr.fetchall()
         self.conn.commit()
         self.curr.close()
-        return json.dumps(service, default=str)
+        return service
