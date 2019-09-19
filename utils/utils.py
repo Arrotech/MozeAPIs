@@ -19,6 +19,14 @@ def check_register_keys(request):
             errors.append(key)
     return errors
 
+def check_password_keys(request):
+    res_keys = ['password']
+    errors = []
+    for key in res_keys:
+        if not key in request.json:
+            errors.append(key)
+    return errors
+
 
 def check_login_keys(request):
     res_keys = ['email', 'password']
@@ -31,7 +39,7 @@ def check_login_keys(request):
 
 def check_add_services_keys(request):
     res_keys = ['portfolio',
-                'occupation', 'phone', 'location', 'img', 'cost']
+                'occupation', 'phone', 'location', 'working_hours', 'cost']
     errors = []
     for key in res_keys:
         if not key in request.json:

@@ -19,12 +19,12 @@ def add_service():
     occupation = details['occupation']
     phone = details['phone']
     location = details['location']
-    img = details['img']
+    working_hours = details['working_hours']
     cost = details['cost']
     if not is_valid_phone(phone):
         return raise_error(400, "Invalid phone number!")
     service = AddServicesModel(
-        portfolio, occupation, phone, location, img, cost).save()
+        portfolio, occupation, phone, location, working_hours, cost).save()
     return make_response(jsonify({
         "status": "201",
         "message": "You have successfully added the service!",

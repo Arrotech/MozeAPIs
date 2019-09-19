@@ -37,7 +37,7 @@ class Database:
                 occupation varchar NOT NULL,
                 phone varchar NOT NULL,
                 location varchar NOT NULL,
-                img varchar NOT NULL,
+                working_hours varchar NOT NULL,
                 cost varchar NOT NULL
             )"""
         ]

@@ -60,3 +60,15 @@ class UsersModel(Database):
         self.conn.commit()
         self.curr.close()
         return json.dumps(user, default=str)
+
+    def update_user(self, username, password):
+        """Change user password."""
+
+        self.curr.execute("""UPDATE users\
+			SET password='{}'\
+			WHERE username='{}' RETURNING username"""
+                        .format(username, password))
+        user = self.curr.fetchone()
+        self.conn.commit()
+        self.curr.close()
+        return user
