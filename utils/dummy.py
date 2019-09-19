@@ -98,6 +98,18 @@ email_exists = {
     "password": "Harun20930988!"
 }
 
+change_password = {
+    "password": "Arrotech20930988!"
+}
+
+change_wrong_password = {
+    "password": "arrotech"
+}
+
+change_password_wrong_json_key = {
+    "paword": "arrotech"
+}
+
 user_login = {
     "email": "petergitundu94@gmail.com",
     "password": "Peter20930988!"
@@ -110,7 +122,7 @@ wrong_login_keys = {
 
 wrong_password_login = {
     "email": "harungachanjagitundu94@gmail.com",
-    "password": "Peter20930988!"
+    "password": "Kevin20930988!"
 }
 
 wrong_email_login = {
@@ -125,7 +137,7 @@ add_service = {
     "occupation": "carpenter",
     "phone": "0711371265",
     "location": "nakuru",
-    "img": "https://picture.png",
+    "working_hours": "8a.m-5p.m",
     "cost": "2500"
 }
 
@@ -134,7 +146,7 @@ wrong_add_services_keys = {
     "occupation": "carpenter",
     "phone": "0711371265",
     "location": "nakuru",
-    "img": "https://picture.png",
+    "working_hours": "8a.m-5p.m",
     "cost": "2500"
 }
 
@@ -143,6 +155,6 @@ wrong_phone = {
     "occupation": "carpenter",
     "phone": "0711371278hvh11265",
     "location": "nakuru",
-    "img": "https://picture.png",
+    "working_hours": "8a.m-5p.m",
     "cost": "2500"
 }
