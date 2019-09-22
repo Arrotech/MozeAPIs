@@ -133,8 +133,11 @@ wrong_email_login = {
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ NEW SERVICE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 add_service = {
+    "name": "Harun Gachanja",
+    "business_name": "Arrotech Adventures",
     "portfolio": "Technical",
     "occupation": "carpenter",
+    "description": "I mend and create all types of furniture",
     "phone": "0711371265",
     "location": "nakuru",
     "working_hours": "8a.m-5p.m",
@@ -142,8 +145,11 @@ add_service = {
 }
 
 wrong_add_services_keys = {
+    "name": "Harun Gachanja",
+    "business_name": "Arrotech Adventures",
     "poolio": "Technical",
     "occupation": "carpenter",
+    "description": "I mend and create all types of furniture",
     "phone": "0711371265",
     "location": "nakuru",
     "working_hours": "8a.m-5p.m",
@@ -151,8 +157,11 @@ wrong_add_services_keys = {
 }
 
 wrong_phone = {
+    "name": "Harun Gachanja",
+    "business_name": "Arrotech Adventures",
     "portfolio": "Technical",
     "occupation": "carpenter",
+    "description": "I mend and create all types of furniture",
     "phone": "0711371278hvh11265",
     "location": "nakuru",
     "working_hours": "8a.m-5p.m",

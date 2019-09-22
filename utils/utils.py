@@ -38,8 +38,8 @@ def check_login_keys(request):
 
 
 def check_add_services_keys(request):
-    res_keys = ['portfolio',
-                'occupation', 'phone', 'location', 'working_hours', 'cost']
+    res_keys = ['name', 'business_name', 'portfolio',
+                'occupation', 'description', 'phone', 'location', 'working_hours', 'cost']
     errors = []
     for key in res_keys:
         if not key in request.json:
@@ -87,12 +87,3 @@ def is_valid_password(variable):
     if re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", variable):
         return True
     return False
-
-
-def portfolio_restrictions(data):
-    """Restrict user inputs in a list."""
-
-    form = ["Health", "Technical", "Education", "Domestic"]
-    if data not in form:
-        return False
-    return True

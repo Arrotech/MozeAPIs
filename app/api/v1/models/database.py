@@ -33,8 +33,11 @@ class Database:
             """
             CREATE TABLE IF NOT EXISTS add_services(
                 service_id serial UNIQUE,
+                name varchar NOT NULL,
+                business_name varchar NOT NULL,
                 portfolio varchar NOT NULL,
                 occupation varchar NOT NULL,
+                description varchar NOT NULL,
                 phone varchar NOT NULL,
                 location varchar NOT NULL,
                 working_hours varchar NOT NULL,
