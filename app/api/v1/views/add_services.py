@@ -15,8 +15,11 @@ def add_service():
     if errors:
         return raise_error(400, "Invalid {} key".format(', '.join(errors)))
     details = request.get_json()
+    name = details['name']
+    business_name = details['business_name']
     portfolio = details['portfolio']
     occupation = details['occupation']
+    description = details['description']
     phone = details['phone']
     location = details['location']
     working_hours = details['working_hours']
@@ -24,7 +27,7 @@ def add_service():
     if not is_valid_phone(phone):
         return raise_error(400, "Invalid phone number!")
     service = AddServicesModel(
-        portfolio, occupation, phone, location, working_hours, cost).save()
+        name, business_name, portfolio, occupation, description, phone, location, working_hours, cost).save()
     return make_response(jsonify({
         "status": "201",
         "message": "You have successfully added the service!",
