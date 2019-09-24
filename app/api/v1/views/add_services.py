@@ -46,7 +46,7 @@ def get_all_services():
     }), 200)
 
 
-@add_services_v1.route('/add_services/<string:occupation>', methods=['GET'])
+@add_services_v1.route('/add_services/<occupation>', methods=['GET'])
 def get_specific_service(occupation):
     """Fetch a specific service."""
     service = AddServicesModel().get_service(occupation)
