@@ -45,3 +45,12 @@ class AddServicesModel(Database):
         self.conn.commit()
         self.curr.close()
         return service
+
+    def get_service_by_location(self, occupation, location):
+        """Get a service by location."""
+        self.curr.execute(
+            ''' SELECT * FROM add_services WHERE occupation=%s and location=%s''', (occupation, location))
+        service = self.curr.fetchall()
+        self.conn.commit()
+        self.curr.close()
+        return service

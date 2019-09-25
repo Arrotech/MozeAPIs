@@ -44,10 +44,27 @@ def get_all_services():
     }), 200)
 
 
-@add_services_v1.route('/add_services/<occupation>', methods=['GET'])
+@add_services_v1.route('/add_services/<string:occupation>', methods=['GET'])
 def get_specific_service(occupation):
     """Fetch a specific service."""
     service = AddServicesModel().get_service(occupation)
+    if service:
+        return make_response(jsonify({
+            "status": "200",
+            "message": "success",
+            "service": service
+        }), 200)
+
+    return make_response(jsonify({
+        "status": "404",
+        "message": "service not found"
+    }), 404)
+
+
+@add_services_v1.route('/add_services/<string:occupation>/<string:location>', methods=['GET'])
+def get_specific_service_by_location(occupation, location):
+    """Fetch a specific service by occupation and location."""
+    service = AddServicesModel().get_service_by_location(occupation, location)
     if service:
         return make_response(jsonify({
             "status": "200",
