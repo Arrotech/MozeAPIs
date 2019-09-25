@@ -99,16 +99,6 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'], 'Invalid email!')
         assert response.status_code == 400
 
-    def test_account_password_input(self):
-        """Test create account password input."""
-        response = self.client.post(
-            '/api/v1/auth/register', data=json.dumps(wrong_account_password), content_type='application/json',
-            headers=self.get_token())
-        result = json.loads(response.data.decode())
-        self.assertEqual(
-            result['message'], 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character!')
-        assert response.status_code == 400
-
     def test_create_account_with_an_existing_phone_number(self):
         """Test when a new user creates a new account with an existing phone number."""
         response = self.client.post(
@@ -233,19 +223,6 @@ class TestUsersAccount(BaseTest):
             headers=self.get_token())
         result = json.loads(response1.data.decode())
         self.assertEqual(result['message'], 'Invalid password key')
-        assert response1.status_code == 400
-
-    def test_change_password_that_is_too_short(self):
-        """Test update user password that does not meet password requirements."""
-
-        response = self.client.post(
-            '/api/v1/auth/register', data=json.dumps(new_account), content_type='application/json',
-            headers=self.get_token())
-        response1 = self.client.put(
-            '/api/v1/auth/users/Arrotech', data=json.dumps(change_wrong_password), content_type='application/json',
-            headers=self.get_token())
-        result = json.loads(response1.data.decode())
-        self.assertEqual(result['message'], 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character!')
         assert response1.status_code == 400
 
     def test_change_password_for_unexisting_user(self):

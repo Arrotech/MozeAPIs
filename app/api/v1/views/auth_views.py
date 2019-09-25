@@ -2,7 +2,7 @@ import json
 from flask import make_response, jsonify, request, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, create_refresh_token, jwt_refresh_token_required, get_raw_jwt
 from app.api.v1.models.auth import UsersModel
-from utils.utils import is_valid_email, raise_error, check_register_keys, check_login_keys, is_valid_password, is_valid_phone, check_password_keys
+from utils.utils import is_valid_email, raise_error, check_register_keys, check_login_keys, is_valid_phone, check_password_keys
 import datetime
 from werkzeug.security import check_password_hash
 
@@ -30,8 +30,6 @@ def signup():
         return raise_error(400, "Invalid phone number!")
     if not is_valid_email(email):
         return raise_error(400, "Invalid email!")
-    if not is_valid_password(password):
-        return raise_error(400, "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character!")
     user_phone = json.loads(UsersModel().get_phone(phone))
     if user_phone:
         return raise_error(400, "Phone number already exists!")
@@ -41,8 +39,7 @@ def signup():
     user_email = json.loads(UsersModel().get_email(email))
     if user_email:
         return raise_error(400, "Email already exists!")
-    user = UsersModel(firstname, lastname, phone,
-                      username, email, password).save()
+    user = UsersModel(firstname, lastname, phone, username, email, password).save()
     user = json.loads(user)
     return make_response(jsonify({
         "message": "Account created successfully!",
@@ -146,8 +143,6 @@ def put(username):
         return raise_error(400, "Invalid {} key".format(', '.join(errors)))
     details = request.get_json()
     password = details['password']
-    if not is_valid_password(password):
-        return raise_error(400, "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character!")
     user = UsersModel().update_user(password, username)
     if user:
         return make_response(jsonify({
