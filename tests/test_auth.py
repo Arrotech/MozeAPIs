@@ -81,15 +81,6 @@ class TestUsersAccount(BaseTest):
         self.assertEqual(result['message'], 'Last name is in wrong format')
         assert response.status_code == 400
 
-    def test_account_phone_input(self):
-        """Test create account phone input."""
-        response = self.client.post(
-            '/api/v1/auth/register', data=json.dumps(wrong_account_phone), content_type='application/json',
-            headers=self.get_token())
-        result = json.loads(response.data.decode())
-        self.assertEqual(result['message'], 'Invalid phone number!')
-        assert response.status_code == 400
-
     def test_account_email_input(self):
         """Test create account email input."""
         response = self.client.post(

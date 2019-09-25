@@ -26,8 +26,6 @@ def signup():
         return raise_error(400, "First name is in wrong format")
     if details['lastname'].isalpha() is False:
         return raise_error(400, "Last name is in wrong format")
-    if not is_valid_phone(phone):
-        return raise_error(400, "Invalid phone number!")
     if not is_valid_email(email):
         return raise_error(400, "Invalid email!")
     user_phone = json.loads(UsersModel().get_phone(phone))
