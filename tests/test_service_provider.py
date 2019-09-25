@@ -56,12 +56,3 @@ class TestAddServices(BaseTest):
         self.assertEqual(result['message'],
                          'service not found')
         assert response.status_code == 404
-
-    def test_add_service_phone(self):
-        """A user can add a service."""
-        response = self.client.post(
-            '/api/v1/add_services', data=json.dumps(wrong_phone), content_type='application/json')
-        result = json.loads(response.data.decode())
-        self.assertEqual(result['message'],
-                         'Invalid phone number!')
-        assert response.status_code == 400

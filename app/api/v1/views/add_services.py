@@ -24,8 +24,6 @@ def add_service():
     location = details['location']
     working_hours = details['working_hours']
     cost = details['cost']
-    if not is_valid_phone(phone):
-        return raise_error(400, "Invalid phone number!")
     service = AddServicesModel(
         name, business_name, portfolio, occupation, description, phone, location, working_hours, cost).save()
     return make_response(jsonify({
