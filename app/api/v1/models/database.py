@@ -37,6 +37,7 @@ class Database:
                 business_name varchar NOT NULL,
                 portfolio varchar NOT NULL,
                 occupation varchar NOT NULL,
+                social_link varchar NOT NULL,
                 description varchar NOT NULL,
                 phone varchar NOT NULL,
                 location varchar NOT NULL,

@@ -19,13 +19,14 @@ def add_service():
     business_name = details['business_name']
     portfolio = details['portfolio']
     occupation = details['occupation']
+    social_link = details['social_link']
     description = details['description']
     phone = details['phone']
     location = details['location']
     working_hours = details['working_hours']
     cost = details['cost']
     service = AddServicesModel(
-        name, business_name, portfolio, occupation, description, phone, location, working_hours, cost).save()
+        name, business_name, portfolio, occupation, social_link, description, phone, location, working_hours, cost).save()
     return make_response(jsonify({
         "status": "201",
         "message": "You have successfully added the service!",
