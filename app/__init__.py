@@ -3,6 +3,7 @@ from flask import Flask, jsonify, make_response, Blueprint
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
+from app.api.v1.models.database import Database
 
 from app.api.v1.views.auth_views import auth
 from app.api.v1.views.add_services import add_services_v1
@@ -35,6 +36,9 @@ def auth_app(config_name):
     jwt = JWTManager(app)
 
     api = Api(app)
+
+    database = Database()
+    database.create_table()
 
     app.register_blueprint(auth, url_prefix='/api/v1/auth/')
     app.register_blueprint(add_services_v1, url_prefix='/api/v1/')
