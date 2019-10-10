@@ -22,7 +22,6 @@ before_script:
   - export FLASK_APP='run.py'
   - psql -c 'create database test_portal;' -U postgres
   - export DB_URL='postgresql://postgres@localhost:5432/test_portal'
-  - flask create
 
 script:
   - pytest --cov=app --cov-report=term-missing
