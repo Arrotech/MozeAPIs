@@ -1,5 +1,6 @@
 import json
 from flask import make_response, jsonify, request, Blueprint
+from flask_mail import Mail
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, create_refresh_token, jwt_refresh_token_required, get_raw_jwt
 from app.api.v1.models.auth import UsersModel
 from utils.utils import is_valid_email, raise_error, check_register_keys, check_login_keys, is_valid_phone, check_password_keys
