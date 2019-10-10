@@ -74,6 +74,7 @@ class Database:
         except Exception as e:
             return e
 
+
 if __name__ == '__main__':
     Database().destroy_table()
     Database().create_table()
