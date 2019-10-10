@@ -13,10 +13,10 @@ install:
   - pip install coveralls
 
 services:
-    - postgresql
+  - postgresql
 
 addons:
-    postgresql: '9.6'
+  postgresql: "9.6"
 
 before_script:
   - export FLASK_APP='run.py'
