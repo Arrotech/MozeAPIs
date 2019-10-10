@@ -37,6 +37,12 @@ language:
 python:
   - "3.6"
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.6"
+
 before_install:
   - gem install bundler
 
