@@ -77,3 +77,19 @@ def get_specific_service_by_location(occupation, location):
         "status": "404",
         "message": "service not found"
     }), 404)
+
+@add_services_v1.route('/add_services/<int:service_id>', methods=['DELETE'])
+def delete(service_id):
+    """Delete a service by ID."""
+
+    service = AddServicesModel().get_service_by_id(service_id)
+    if service:
+        AddServicesModel().delete(service_id)
+        return make_response(jsonify({
+            "status": "200",
+            "message": "service deleted"
+        }), 200)
+    return make_response(jsonify({
+        "status": "404",
+        "message": "service not found"
+    }), 404)

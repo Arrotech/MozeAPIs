@@ -47,6 +47,15 @@ class AddServicesModel(Database):
         self.curr.close()
         return service
 
+    def get_service_by_id(self, service_id):
+        """Fetch a single service by ID."""
+
+        self.curr.execute(""" SELECT * FROM add_services WHERE service_id={}""".format(service_id))
+        service = self.curr.fetchone()
+        self.conn.commit()
+        self.curr.close()
+        return json.dumps(service, default=str)
+
     def get_service_by_location(self, occupation, location):
         """Get a service by location."""
         self.curr.execute(
@@ -55,3 +64,10 @@ class AddServicesModel(Database):
         self.conn.commit()
         self.curr.close()
         return service
+
+    def delete(self, service_id):
+        ''' Delete service by ID.'''
+
+        self.curr.execute(''' DELETE FROM add_services WHERE service_id=%s''', (service_id,))
+        self.conn.commit()
+        self.curr.close()
