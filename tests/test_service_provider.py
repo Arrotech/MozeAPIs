@@ -76,3 +76,15 @@ class TestAddServices(BaseTest):
         self.assertEqual(result['message'],
                          'service not found')
         assert response.status_code == 404
+
+    def test_delete_service(self):
+        """Test deleting a service by ID."""
+
+        response = self.client.post(
+            '/api/v1/add_services', data=json.dumps(add_service), content_type='application/json')
+        response1 = self.client.delete(
+            '/api/v1/add_services/1', content_type='application/json')
+        result = json.loads(response1.data.decode())
+        self.assertEqual(result['message'],
+                         'service deleted')
+        assert response1.status_code == 200
